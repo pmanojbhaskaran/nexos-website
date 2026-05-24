@@ -95,8 +95,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .hero{padding:152px 0 96px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;top:-150px;right:-150px;width:500px;height:500px;background:radial-gradient(circle,var(--teal-soft) 0%,transparent 70%);pointer-events:none}
 .hero-inner{position:relative;z-index:1}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--teal-soft);border:1px solid var(--courier-border);border-radius:100px;padding:6px 16px 6px 8px;margin-bottom:28px;font-size:13px;font-weight:500;color:var(--teal)}
-.hero-badge-dot{width:7px;height:7px;background:var(--teal);border-radius:50%;animation:pulse 2s ease-in-out infinite}
+.hero-badge-wrap{text-align:center;margin-bottom:32px}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:var(--teal-soft);border:1px solid var(--courier-border);border-radius:100px;padding:8px 22px 8px 14px;font-size:15px;font-weight:600;color:var(--teal);letter-spacing:.2px}
+.hero-badge-dot{width:8px;height:8px;background:var(--teal);border-radius:50%;animation:pulse 2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
 .hero-tagline{font-family:'JetBrains Mono',monospace;font-size:clamp(14px,2vw,16px);color:var(--teal);letter-spacing:.3px;margin-bottom:16px;font-weight:700}
 .hero h1{font-size:clamp(34px,5.5vw,60px);font-weight:700;line-height:1.08;letter-spacing:-1.5px;max-width:780px;margin-bottom:20px}
@@ -302,7 +303,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <!-- HERO -->
 <section class="hero">
 <div class="container hero-inner">
-  <div class="hero-badge"><span class="hero-badge-dot"></span>Launching Soon for Indian Logistics Operators</div>
+  <div class="hero-badge-wrap"><div class="hero-badge"><span class="hero-badge-dot"></span>Launching Soon for Indian Logistics Operators</div></div>
   <p class="hero-tagline">Run your courier. Not your spreadsheets.</p>
   <h1>The Courier &amp; Co&#8209;loader Operating System for India</h1>
   <p class="hero-promise">Built on 32,000+ live consignments at Exeed Logistik across 9 Indian cities. Every module solves a problem we lived through &#8212; AWB tracking, COD reconciliation, NDR handling, hub scan discipline, billing leakage.</p>
