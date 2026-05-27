@@ -274,6 +274,123 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 [data-theme="dark"] .laws-banner h3{color:#F0EDE6!important}
 [data-theme="dark"] .laws-banner p,[data-theme="dark"] .laws-list li{color:#D4D0C8!important;opacity:1!important}
 @media(max-width:520px){.price-actions{grid-template-columns:1fr}.price-actions .btn-p,.price-actions .btn-s{white-space:normal}}
+/* NEXOS pricing card hard alignment override */
+.pricing-grid,
+.price-grid,
+.pricing-cards{
+  align-items:stretch !important;
+}
+
+.pricing-grid > *,
+.price-grid > *,
+.pricing-cards > *{
+  height:100% !important;
+}
+
+.price-card{
+  height:100% !important;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:flex-start !important;
+}
+
+.price-card > *{
+  flex-shrink:0 !important;
+}
+
+.price-card h3{
+  min-height:108px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  margin-bottom:18px !important;
+}
+
+.price-card > p{
+  text-align:center !important;
+}
+
+.price-card > p:first-of-type{
+  min-height:136px !important;
+  margin-bottom:18px !important;
+}
+
+.price-card .price-tag,
+.price-card .price-title,
+.price-card .price-price{
+  min-height:92px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+
+.price-card hr{
+  margin:22px 0 !important;
+}
+
+.price-note{
+  min-height:168px !important;
+  display:flex !important;
+  align-items:flex-start !important;
+  justify-content:center !important;
+  text-align:center !important;
+}
+
+.price-actions{
+  margin-top:auto !important;
+  display:grid !important;
+  grid-template-columns:minmax(0,1.45fr) minmax(0,0.95fr) !important;
+  gap:14px !important;
+  align-items:stretch !important;
+}
+
+.price-actions .btn-p,
+.price-actions .btn-s{
+  width:100% !important;
+  min-height:62px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  white-space:nowrap !important;
+}
+
+@media (max-width:1100px){
+  .price-card > p:first-of-type{
+    min-height:0 !important;
+  }
+
+  .price-note{
+    min-height:0 !important;
+  }
+}
+
+@media (max-width:720px){
+  .price-actions{
+    grid-template-columns:1fr !important;
+  }
+
+  .price-actions .btn-p,
+  .price-actions .btn-s{
+    white-space:normal !important;
+  }
+}
+
+/* NEXOS pricing strict equal-card alignment patch */
+.pricing-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:stretch}
+.price-card{height:100%;min-height:520px;display:grid;grid-template-rows:32px 86px 104px 64px 1px 118px 64px;row-gap:12px;align-items:start}
+.price-card .price-name{height:32px;display:flex;align-items:center;justify-content:center;text-align:center;margin:0}
+.price-card h3{height:86px;display:flex;align-items:center;justify-content:center;text-align:center;margin:0;line-height:1.35}
+.price-card .price-icp{height:104px;display:flex;align-items:center;justify-content:center;text-align:center;margin:0;line-height:1.6}
+.price-card .price-value{height:64px;display:flex;align-items:center;justify-content:center;text-align:center;margin:0;font-size:20px;font-weight:800;color:var(--ink);line-height:1.25}
+.price-card .price-divider{height:1px;background:var(--border);width:100%}
+.price-card .price-note{height:118px;display:flex;align-items:center;justify-content:center;text-align:center;margin:0;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-muted);line-height:1.55;border-top:0;padding:0}
+.price-card .price-actions{height:64px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.72fr);gap:10px;align-items:stretch;margin:0}
+.price-card .price-actions .btn-p,.price-card .price-actions .btn-s{width:100%;height:100%;justify-content:center;text-align:center;white-space:nowrap;padding-left:8px;padding-right:8px}
+@media(max-width:1024px){.pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.price-card{min-height:500px}}
+@media(max-width:640px){.pricing-grid{grid-template-columns:1fr}.price-card{grid-template-rows:auto auto auto auto 1px auto auto;min-height:auto}.price-card .price-name,.price-card h3,.price-card .price-icp,.price-card .price-value,.price-card .price-note,.price-card .price-actions{height:auto}.price-card .price-actions{grid-template-columns:1fr}.price-card .price-actions .btn-p,.price-card .price-actions .btn-s{min-height:48px;white-space:normal}}
 </style>
 </head>
 <body>
