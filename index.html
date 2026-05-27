@@ -392,6 +392,21 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .price-card .price-actions .btn-p,.price-card .price-actions .btn-s{width:100%;height:100%;justify-content:center;text-align:center;white-space:nowrap;padding-left:8px;padding-right:8px}
 @media(max-width:1024px){.pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.price-card{min-height:500px}}
 @media(max-width:640px){.pricing-grid{grid-template-columns:1fr}.price-card{grid-template-rows:auto auto auto auto 1px auto auto;min-height:auto}.price-card .price-name,.price-card h3,.price-card .price-icp,.price-card .price-value,.price-card .price-note,.price-card .price-actions{height:auto}.price-card .price-actions{grid-template-columns:1fr}.price-card .price-actions .btn-p,.price-card .price-actions .btn-s{min-height:48px;white-space:normal}}
+
+/* NEXOS pricing strict equal-card alignment patch v3 */
+#pricing-preview .pricing-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:stretch}
+#pricing-preview .price-card{height:100%;min-height:520px;display:grid;grid-template-rows:32px 86px 104px 64px 1px 118px 64px;row-gap:12px;align-items:start}
+#pricing-preview .price-name{height:32px;display:flex;align-items:center;justify-content:center;text-align:center;margin:0;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--teal);font-weight:700}
+#pricing-preview .price-card h3{height:86px;display:flex;align-items:center;justify-content:center;text-align:center;margin:0;line-height:1.35}
+#pricing-preview .price-icp{height:104px;display:flex;align-items:center;justify-content:center;text-align:center;margin:0;line-height:1.6;color:var(--ink-muted)}
+#pricing-preview .price-value{height:64px;display:flex;align-items:center;justify-content:center;text-align:center;margin:0;font-size:20px;font-weight:800;color:var(--ink);line-height:1.25}
+#pricing-preview .price-divider{height:1px;background:var(--border);width:100%}
+#pricing-preview .price-note{height:118px;display:flex;align-items:center;justify-content:center;text-align:center;margin:0;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-muted);line-height:1.55;border-top:0;padding:0}
+#pricing-preview .price-actions{height:64px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,0.72fr);gap:10px;align-items:stretch;margin:0}
+#pricing-preview .price-actions .btn-p,#pricing-preview .price-actions .btn-s{width:100%;height:100%;justify-content:center;text-align:center;white-space:nowrap;padding-left:8px;padding-right:8px}
+#pricing-preview .pricing-footnote{text-align:center;color:var(--ink-muted);font-size:13px;margin-top:18px}
+@media(max-width:1024px){#pricing-preview .pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#pricing-preview .price-card{min-height:500px}}
+@media(max-width:640px){#pricing-preview .pricing-grid{grid-template-columns:1fr}#pricing-preview .price-card{grid-template-rows:auto auto auto auto 1px auto auto;min-height:auto}#pricing-preview .price-name,#pricing-preview .price-card h3,#pricing-preview .price-icp,#pricing-preview .price-value,#pricing-preview .price-note,#pricing-preview .price-actions{height:auto}#pricing-preview .price-actions{grid-template-columns:1fr}#pricing-preview .price-actions .btn-p,#pricing-preview .price-actions .btn-s{min-height:48px;white-space:normal}}
 </style>
 </head>
 <body>
@@ -591,19 +606,70 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </section>
 
 <!-- PRICING -->
-<section class="section" id="pricing-preview" style="background:var(--surface)">
-<div class="container">
-  <div class="fade-up"><p class="slabel">Pricing</p><h2 class="stitle">Public starting packages. Guided final fitment.</h2><p class="ssub">NEXOS will show starting-package pricing, but the final plan recommendation depends on business type, users, branches, shipment volume, linehaul model, and required modules.</p></div>
-  <div class="pricing-grid fade-up">
-    <div class="price-card"><p class="price-name">NEXOS Courier OS</p><h3>Courier Operators</h3><p class="price-icp">For courier and express operators running booking, pickup, hub, delivery, POD, billing, and COD.</p><p class="price-start">Starting from ₹X/month</p><p class="price-note">Includes up to Y users / Z shipments / basic branch setup. Additional users, branches, shipment bands, and advanced modules billed separately.</p><div class="price-actions"><a class="btn-p" href="javascript:void(0)" onclick="openNotify('Guided Plan Recommendation')">Check My Fit &amp; Price</a><a class="btn-s" href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a></div></div>
-    <div class="price-card"><p class="price-name">NEXOS Co-loader OS</p><h3>Co-loader Operators</h3><p class="price-icp">For co-loaders managing shared linehaul, bagging, manifest, airport handover/retrieval, and settlement.</p><p class="price-start">Starting from ₹X/month</p><p class="price-note">Includes core co-loader workflows and baseline lane setup. Additional lanes, users, integrations, and advanced settlement controls billed separately.</p><div class="price-actions"><a class="btn-p" href="javascript:void(0)" onclick="openNotify('Guided Plan Recommendation')">Check My Fit &amp; Price</a><a class="btn-s" href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a></div></div>
-    <div class="price-card"><p class="price-name">Courier + PTL Config</p><h3>Courier Using Co-loader Linehaul</h3><p class="price-icp">For courier operators using PTL/shared linehaul capacity from co-loaders or partner networks.</p><p class="price-start">Guided pricing</p><p class="price-note">Price depends on partner linehaul complexity, lanes, payable controls, settlement rules, and operational handover requirements.</p><div class="price-actions"><a class="btn-p" href="javascript:void(0)" onclick="openNotify('Guided Plan Recommendation')">Check My Fit & Price</a><a class="btn-s" href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a></div></div>
-    <div class="price-card"><p class="price-name">Co-loader + Courier Add-on</p><h3>Co-loader With Courier Ops</h3><p class="price-icp">For co-loaders that also run direct courier operations as an additional operating capability.</p><p class="price-start">Implementation-led quote</p><p class="price-note">Requires business-line separation, workflow configuration, permissions, rate setup, and tenant implementation review before quote.</p><div class="price-actions"><a class="btn-p" href="javascript:void(0)" onclick="openNotify('Guided Plan Recommendation')">Check My Fit & Price</a><a class="btn-s" href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a></div></div>
+<section class="section" id="pricing-preview">
+  <div class="container">
+    <div class="section-head fade-up">
+      <p class="slabel">Pricing</p>
+      <h2 class="stitle">Public starting packages. Guided fitment before final quote.</h2>
+      <p class="ssub">NEXOS shows starting packages clearly, but the correct operating system setup depends on business type, linehaul model, users, branches, shipment volume, COD, billing complexity, and co-loader dependency.</p>
+    </div>
+
+    <div class="pricing-grid fade-up">
+      <div class="price-card">
+        <p class="price-name">NEXOS Courier OS</p>
+        <h3>Courier Operators</h3>
+        <p class="price-icp">For courier and express operators running booking, pickup, hub, delivery, POD, billing, and COD.</p>
+        <p class="price-value">Starting from ₹X/month</p>
+        <div class="price-divider" aria-hidden="true"></div>
+        <p class="price-note">Includes up to Y users / Z shipments / basic branch setup. Additional users, branches, shipment bands, and advanced modules billed separately.</p>
+        <div class="price-actions">
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Check My Fit & Price</a>
+          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <p class="price-name">NEXOS Co-loader OS</p>
+        <h3>Co-loader Operators</h3>
+        <p class="price-icp">For co-loaders managing shared linehaul, bagging, manifest, airport handover/retrieval, and settlement.</p>
+        <p class="price-value">Starting from ₹X/month</p>
+        <div class="price-divider" aria-hidden="true"></div>
+        <p class="price-note">Includes core co-loader workflows and baseline lane setup. Additional lanes, users, integrations, and advanced settlement controls billed separately.</p>
+        <div class="price-actions">
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Check My Fit & Price</a>
+          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <p class="price-name">Courier + PTL Config</p>
+        <h3>Courier Using Co-loader Linehaul</h3>
+        <p class="price-icp">For courier operators using PTL/shared linehaul capacity from co-loaders or partner networks.</p>
+        <p class="price-value">Guided pricing</p>
+        <div class="price-divider" aria-hidden="true"></div>
+        <p class="price-note">Price depends on partner linehaul complexity, lanes, payable controls, settlement rules, and operational handover requirements.</p>
+        <div class="price-actions">
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Check My Fit & Price</a>
+          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <p class="price-name">Co-loader + Courier Add-on</p>
+        <h3>Co-loader With Courier Ops</h3>
+        <p class="price-icp">For co-loaders that also run direct courier operations as an additional operating capability.</p>
+        <p class="price-value">Implementation-led quote</p>
+        <div class="price-divider" aria-hidden="true"></div>
+        <p class="price-note">Requires business-line separation, workflow configuration, permissions, rate setup, and tenant implementation review before quote.</p>
+        <div class="price-actions">
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Check My Fit & Price</a>
+          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="pricing-footnote">Final commercial proposal is generated after fitment review. This prevents wrong-plan buying and avoids per-AWB pricing traps for small operators.</p>
   </div>
-  <div class="guided-note fade-up">
-    <strong>Why guided pricing?</strong> A courier with 2 branches and PTL co-loader dependency should not be priced like a co-loader handling airport lodgement across multiple lanes. NEXOS recommends the right OS package before subscription or implementation begins.
-  </div>
-</div>
 </section>
 
 <!-- CTA -->
