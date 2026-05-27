@@ -467,6 +467,48 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   #pricing-preview .price-actions{grid-template-columns:1fr!important}
   #pricing-preview .price-actions .btn-p,#pricing-preview .price-actions .btn-s{height:46px!important;min-height:46px!important;white-space:normal!important}
 }
+
+/* NEXOS dark-mode problem-card contrast patch v6 */
+[data-theme="dark"] .problem,
+[data-theme="dark"] .problem *{
+  color:#EDEAE3!important;
+}
+
+[data-theme="dark"] .problem .slabel{
+  color:#38D4CF!important;
+}
+
+[data-theme="dark"] .problem .stitle,
+[data-theme="dark"] .problem h2,
+[data-theme="dark"] .problem h3,
+[data-theme="dark"] .problem h4,
+[data-theme="dark"] .problem-card h3,
+[data-theme="dark"] .problem-card h4,
+[data-theme="dark"] .problem-card strong,
+[data-theme="dark"] .problem-card .card-title{
+  color:#F7F4EC!important;
+  opacity:1!important;
+}
+
+[data-theme="dark"] .problem .ssub,
+[data-theme="dark"] .problem-card p,
+[data-theme="dark"] .problem-card li,
+[data-theme="dark"] .problem-card span{
+  color:#D8D3C8!important;
+  opacity:1!important;
+}
+
+[data-theme="dark"] .problem-card{
+  background:rgba(255,255,255,0.045)!important;
+  border-color:rgba(255,255,255,0.12)!important;
+}
+
+[data-theme="dark"] .problem-card svg,
+[data-theme="dark"] .problem-card .icon,
+[data-theme="dark"] .problem-card i{
+  color:#38D4CF!important;
+  opacity:1!important;
+}
 </style>
 </head>
 <body>
