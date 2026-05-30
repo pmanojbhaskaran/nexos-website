@@ -845,7 +845,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         <div class="price-divider" aria-hidden="true"></div>
         <p class="price-note">Scope covers users, branches, shipment bands, COD, and modules. Final commercial proposal after fitment review.</p>
         <div class="price-actions">
-          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Request fitment review</a>
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Request fitment review')">Request fitment review</a>
           <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
         </div>
       </div>
@@ -858,7 +858,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         <div class="price-divider" aria-hidden="true"></div>
         <p class="price-note">Lanes, users, settlement controls, and co-loader responsibility complexity reviewed during fitment.</p>
         <div class="price-actions">
-          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Request fitment review</a>
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Request fitment review')">Request fitment review</a>
           <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
         </div>
       </div>
@@ -871,7 +871,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         <div class="price-divider" aria-hidden="true"></div>
         <p class="price-note">Partner linehaul complexity, payable controls, and handover rules shape the commercial scope.</p>
         <div class="price-actions">
-          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Request fitment review</a>
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Request fitment review')">Request fitment review</a>
           <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a>
         </div>
       </div>
@@ -884,7 +884,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         <div class="price-divider" aria-hidden="true"></div>
         <p class="price-note">Business-line separation, permissions, and implementation scope confirmed before any commercial offer.</p>
         <div class="price-actions">
-          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Request fitment review</a>
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Request fitment review')">Request fitment review</a>
           <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a>
         </div>
       </div>
@@ -999,7 +999,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     </div>
     <div style="display:flex;align-items:flex-start;gap:8px;margin-top:2px"><input type="checkbox" id="nf-consent" style="margin-top:3px;width:auto"><label for="nf-consent" style="font-size:11px;color:var(--ink-muted);font-weight:400">I consent to be contacted by Adyaya Solutions regarding NEXOS. My data will not be shared with third parties.</label></div>
     <div class="notify-actions">
-      <button class="btn-p" id="notifySubmitBtn" type="button" onclick="submitNotify()">Submit Interest</button>
+      <button class="btn-p" id="notifySubmitBtn" type="button" onclick="submitNotify()">Join Pilot Waitlist</button>
       <button class="btn-s" type="button" onclick="hideNotify()">Cancel</button>
     </div>
     <p id="notifyErr" style="display:none;color:var(--error);font-size:12px;margin-top:6px;text-align:center"></p>
@@ -1031,7 +1031,7 @@ function showCS(name){document.getElementById('csTitle').textContent=name+' \u20
 function hideCS(){document.getElementById('csModal').classList.remove('active');document.body.style.overflow=''}
 
 var NOTIFY_CONFIG={
-  'Check My Fit & Price':{badge:'Fit & Price',title:'Check My Fit & Price',subtitle:'Tell us about your operation. We will recommend the right NEXOS scope and conduct a founder-led fitment review.',emailTo:['sales@nexos.co.in'],subject:'NEXOS Fit and Price Request',btnLabel:'Request fitment review'},
+  'Request fitment review':{badge:'Fit & Price',title:'Request fitment review',subtitle:'Tell us about your operation. We will recommend the right NEXOS scope and conduct a founder-led fitment review.',emailTo:['sales@nexos.co.in'],subject:'NEXOS Fit and Price Request',btnLabel:'Request fitment review'},
   'Guided Plan Recommendation':{badge:'Fit & Price',title:'Guided Plan Recommendation',subtitle:'Tell us about your operation. We will recommend the right NEXOS scope and conduct a founder-led fitment review.',emailTo:['sales@nexos.co.in'],subject:'NEXOS Fit and Price Request',btnLabel:'Submit Fit & Price Request'},
   'Pricing Updates':{badge:'Pricing',title:'Get Pricing Updates',subtitle:'Be the first to know when NEXOS public package pricing is finalised.',emailTo:['sales@nexos.co.in'],subject:'NEXOS Pricing Interest',btnLabel:'Get Pricing Updates'},
   'Request Founder Demo':{badge:'Request Founder Demo',title:'Request Founder Demo',subtitle:'Tell us about your courier or co-loader operation. We will review fitment and schedule a founder-led walkthrough.',emailTo:['demo@nexos.co.in','sales@nexos.co.in'],subject:'NEXOS Founder Demo Request',btnLabel:'Submit Demo Request'},
