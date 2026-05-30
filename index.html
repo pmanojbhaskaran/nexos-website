@@ -78,10 +78,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 /* Header */
 .site-header{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--header-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow .3s,background .3s}
 .site-header.scrolled{box-shadow:var(--shadow-sm)}
-.nav-wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:21px;letter-spacing:-.3px}
+.nav-wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:68px;column-gap:20px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:21px;letter-spacing:-.3px;grid-column:1;justify-self:start}
 .logo-mark{width:34px;height:34px;background:var(--teal);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links{display:flex;align-items:center;justify-content:center;gap:28px;list-style:none;grid-column:2;justify-self:center;min-width:0}
+.nav-actions{display:flex;align-items:center;gap:12px;grid-column:3;justify-self:end;flex-shrink:0}
+.nav-mobile-wrap{display:none;align-items:center;gap:10px;grid-column:3;justify-self:end}
 .nav-links a{font-size:14px;font-weight:500;color:var(--ink-muted);transition:color .2s}
 .nav-links a:hover{color:var(--ink)}
 .theme-toggle{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s;border:1px solid var(--border);color:var(--ink-muted)}
@@ -102,8 +104,26 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 @keyframes badgeBlink{0%,100%{box-shadow:0 0 0 0 rgba(232,93,4,0);border-color:var(--courier-border)}50%{box-shadow:0 0 18px 4px rgba(232,93,4,0.2);border-color:#E85D04}}
 .hero-tagline{font-family:'JetBrains Mono',monospace;font-size:clamp(14px,2vw,16px);color:var(--teal);letter-spacing:.3px;margin-bottom:16px;font-weight:700}
 .hero h1{font-size:clamp(34px,5.5vw,60px);font-weight:700;line-height:1.08;letter-spacing:-1.5px;max-width:780px;margin-bottom:20px}
-.hero-promise{font-size:17px;color:var(--ink-muted);max-width:540px;line-height:1.75;margin-bottom:36px}
-.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:56px}
+.hero-position{font-size:16px;color:var(--ink-soft);max-width:640px;line-height:1.65;margin-bottom:12px;font-weight:600}
+.hero-body{font-size:15px;color:var(--ink-muted);max-width:640px;line-height:1.65;margin-bottom:14px}
+.hero-cta-note{font-size:14px;color:var(--ink-muted);max-width:540px;line-height:1.6;margin-bottom:22px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
+.preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:48px}
+.preview-card{border:1px solid var(--border);border-radius:12px;padding:22px 20px;background:var(--card);transition:box-shadow .3s;min-width:0}
+.preview-card:hover{box-shadow:var(--shadow-md)}
+.preview-chip{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;padding:4px 10px;border-radius:100px;background:var(--teal-soft);color:var(--teal);margin-bottom:12px}
+.preview-card h4{font-size:15px;font-weight:700;margin-bottom:6px;line-height:1.3}
+.preview-card p{font-size:13px;color:var(--ink-muted);line-height:1.55}
+.ai-panel{margin-top:48px;background:var(--card);border:1.5px solid var(--border);border-radius:14px;padding:36px 32px;width:100%;max-width:none}
+.ai-panel h3{font-size:22px;font-weight:700;margin-bottom:14px;line-height:1.3}
+.ai-panel p{font-size:15px;color:var(--ink-muted);line-height:1.75;margin-bottom:12px}
+.ai-callout{margin-top:18px;padding:16px 18px;border-radius:10px;background:var(--teal-soft);border:1px solid var(--courier-border);font-size:14px;color:var(--ink-soft);line-height:1.65}
+.legal-block{max-width:720px}
+.legal-block p,.legal-block li{font-size:15px;color:var(--ink-muted);line-height:1.75;margin-bottom:10px}
+.legal-block ul{margin:8px 0 16px 22px}
+.legal-block a{color:var(--teal);font-weight:600}
+.pricing-intro{max-width:720px;margin:0 auto 32px;text-align:center;font-size:15px;color:var(--ink-muted);line-height:1.75}
+.final-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:24px}
 .hero-proof{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;padding-top:40px;border-top:1px solid var(--border)}
 .proof-item{display:flex;align-items:flex-start;gap:12px}
 .proof-icon{color:var(--teal);margin-top:2px}
@@ -212,6 +232,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .final-cta h2{font-size:clamp(26px,4vw,40px);font-weight:700;margin-bottom:14px}
 .final-cta p{font-size:16px;opacity:.55;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto}
 .final-cta .btn-p{font-size:16px;padding:14px 32px;border-radius:10px}
+.final-cta .btn-s{color:#F7F6F2;border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.06);font-size:15px;padding:14px 28px;border-radius:10px}
+.final-cta .btn-s:hover{border-color:rgba(255,255,255,0.85);background:rgba(255,255,255,0.12);color:#fff}
+[data-theme="dark"] .final-cta .btn-s{color:var(--ink);border-color:var(--border);background:var(--ivory)}
+[data-theme="dark"] .final-cta .btn-s:hover{border-color:var(--teal);background:var(--teal-soft);color:var(--teal)}
 
 /* Footer */
 .site-footer{background:var(--surface);border-top:1px solid var(--border);padding:64px 0 36px}
@@ -226,9 +250,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .footer-legal{display:flex;gap:20px}
 
 /* Modals */
-.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:var(--overlay);backdrop-filter:blur(8px);align-items:center;justify-content:center}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:200;background:var(--overlay);backdrop-filter:blur(8px);align-items:flex-start;justify-content:center;overflow-y:auto;padding:24px 16px}
 .modal-overlay.active{display:flex}
-.modal-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;max-width:480px;width:92%;text-align:center;box-shadow:var(--shadow-lg);animation:modalIn .3s ease}
+.modal-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;max-width:480px;width:92%;text-align:center;box-shadow:var(--shadow-lg);animation:modalIn .3s ease;margin:auto}
+.modal-box.notify-modal{max-width:520px;width:min(520px,94vw);padding:28px 28px 32px;text-align:left;max-height:none}
 @keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .modal-box h3{font-size:22px;font-weight:700;margin-bottom:10px}
 .modal-box p{font-size:14px;color:var(--ink-muted);line-height:1.7;margin-bottom:20px}
@@ -242,6 +267,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .notify-form input:focus,.notify-form select:focus{outline:none;border-color:var(--teal)}
 .notify-form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .notify-msg{padding:14px;border-radius:10px;background:var(--success-soft);color:var(--success);font-size:14px;font-weight:600;text-align:center}
+.notify-actions{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.notify-actions .btn-p,.notify-actions .btn-s{width:100%;min-height:48px;justify-content:center;text-align:center;line-height:1.35;white-space:normal;padding:12px 16px}
+#notifySubmitBtn{font-size:14px}
 
 /* Mobile nav */
 .mobile-nav{display:none;position:fixed;top:68px;left:0;right:0;bottom:0;background:var(--ivory);z-index:99;padding:20px}
@@ -522,6 +550,43 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   fill:none!important;
   opacity:1!important;
 }
+
+/* NEXOS UI fix patch — nav, modal, pricing CTAs, AI width */
+#pricing-preview .price-actions,
+.price-card .price-actions,
+.price-actions{
+  display:flex!important;
+  flex-direction:column!important;
+  grid-template-columns:unset!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  gap:10px!important;
+  margin-top:auto!important;
+}
+#pricing-preview .price-actions .btn-p,
+#pricing-preview .price-actions .btn-s,
+.price-card .price-actions .btn-p,
+.price-card .price-actions .btn-s,
+.price-actions .btn-p,
+.price-actions .btn-s{
+  width:100%!important;
+  height:auto!important;
+  min-height:44px!important;
+  max-height:none!important;
+  white-space:normal!important;
+  font-size:13px!important;
+  line-height:1.35!important;
+  padding:11px 12px!important;
+}
+#ai-approach .ai-panel{width:100%!important;max-width:none!important}
+.hero-promise{display:none}
+@media(min-width:769px){.nav-mobile-wrap{display:none!important}}
+@media(max-width:768px){
+  .nav-wrap{grid-template-columns:1fr auto}
+  .nav-actions{display:none!important}
+  .nav-mobile-wrap{display:flex!important}
+}
 </style>
 </head>
 <body>
@@ -554,10 +619,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     <li><a href="#chain">How It Works</a></li>
     <li><a href="#why-nexos">Why NEXOS</a></li>
     <li><a href="#pricing-preview">Pricing</a></li>
-    <li><button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><svg class="ico ti-moon"><use href="#i-moon"/></svg><svg class="ico ti-sun"><use href="#i-sun"/></svg></button></li>
-    <li><a href="javascript:void(0)" class="btn-p" onclick="openNotify('Book a Demo')">Book Demo</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:10px">
+  <div class="nav-actions">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><svg class="ico ti-moon"><use href="#i-moon"/></svg><svg class="ico ti-sun"><use href="#i-sun"/></svg></button>
+    <a href="javascript:void(0)" class="btn-p" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
+  </div>
+  <div class="nav-mobile-wrap">
     <button class="theme-toggle mob-show" onclick="toggleTheme()" aria-label="Toggle theme" style="display:none" id="mobTheme"><svg class="ico ti-moon"><use href="#i-moon"/></svg><svg class="ico ti-sun"><use href="#i-sun"/></svg></button>
     <button class="mobile-toggle" onclick="toggleMob()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -571,7 +638,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   <a href="#why-nexos" onclick="closeMob()">Why NEXOS</a>
   <a href="#pricing-preview" onclick="closeMob()">Pricing</a>
   <a href="javascript:void(0)" onclick="closeMob();openNotify('Contact Us')">Contact</a>
-  <a href="javascript:void(0)" onclick="closeMob();openNotify('Book a Demo')">Book Demo</a>
+  <a href="javascript:void(0)" onclick="closeMob();openNotify('Request Founder Demo')">Request Founder Demo</a>
+  <a href="javascript:void(0)" onclick="closeMob();openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a>
 </div>
 
 <!-- HERO -->
@@ -579,17 +647,19 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <div class="container hero-inner">
   <div class="hero-badge-wrap"><div class="hero-badge"><span class="hero-badge-dot"></span>Launching Soon for Indian Logistics Operators</div></div>
   <p class="hero-tagline">Run your courier. Not your spreadsheets.</p>
-  <h1>The Courier &amp; Co&#8209;loader Operating System for India</h1>
-  <p class="hero-promise">Built on 32,000+ live consignments at Exeed Logistik across 9 Indian cities. Every module solves a problem we lived through &#8212; AWB tracking, COD reconciliation, NDR handling, hub scan discipline, billing leakage.</p>
+  <h1>The Courier and Co-loader Operating System for India</h1>
+  <p class="hero-position">Courier and Co-loader Operating System for Indian logistics MSME operators.</p>
+  <p class="hero-body">NEXOS helps courier and co-loader businesses structure booking, bagging, manifesting, airport lodgement and retrieval, POD, COD, billing, branch control, compliance, and control-tower visibility in one workflow-led platform.</p>
+  <p class="hero-cta-note">Share your current courier or co-loader process. We will review fitment and schedule a founder-led walkthrough.</p>
   <div class="hero-ctas">
-    <a href="javascript:void(0)" class="btn-p" onclick="openNotify('Book a Demo')">Book a Demo <svg class="ico" style="width:15px;height:15px"><use href="#i-arrow"/></svg></a>
-    <a href="#pricing-preview" class="btn-s">View Pricing</a>
+    <a href="javascript:void(0)" class="btn-p" onclick="openNotify('Request Founder Demo')">Request Founder Demo <svg class="ico" style="width:15px;height:15px"><use href="#i-arrow"/></svg></a>
+    <a href="javascript:void(0)" class="btn-s" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a>
   </div>
   <div class="hero-proof">
-    <div class="proof-item"><svg class="ico proof-icon"><use href="#i-zap"/></svg><div class="proof-text"><strong>32,000+ Live Consignments</strong><span>Built inside a live logistics operation</span></div></div>
-    <div class="proof-item"><svg class="ico proof-icon"><use href="#i-users"/></svg><div class="proof-text"><strong>50+ B2B Customers, 9 Cities</strong><span>Pharma, automotive, electronics, luxury</span></div></div>
-    <div class="proof-item"><svg class="ico proof-icon"><use href="#i-shield"/></svg><div class="proof-text"><strong>No API or AI Dependency</strong><span>Core ops work without external services</span></div></div>
-    <div class="proof-item"><svg class="ico proof-icon"><use href="#i-lock"/></svg><div class="proof-text"><strong>Tenant-Isolated by Design</strong><span>Your data is never shared with others</span></div></div>
+    <div class="proof-item"><svg class="ico proof-icon"><use href="#i-zap"/></svg><div class="proof-text"><strong>Workflow-led platform</strong><span>Structured booking through billing in one operating chain</span></div></div>
+    <div class="proof-item"><svg class="ico proof-icon"><use href="#i-users"/></svg><div class="proof-text"><strong>Courier and co-loader workflows</strong><span>Booking, handover, linehaul, and responsibility paths</span></div></div>
+    <div class="proof-item"><svg class="ico proof-icon"><use href="#i-rupee"/></svg><div class="proof-text"><strong>POD, COD, billing and branch control</strong><span>Operational and financial control in one chain</span></div></div>
+    <div class="proof-item"><svg class="ico proof-icon"><use href="#i-shield"/></svg><div class="proof-text"><strong>Indian logistics MSME focus</strong><span>Designed for operators moving beyond spreadsheets</span></div></div>
   </div>
 </div>
 </section>
@@ -644,7 +714,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     <div class="sol-card courier"><p class="sol-tag">NEXOS Courier OS</p><h3>Courier / Express Operators</h3><p>For operators booking shipments from customers and delivering through own branches, agents, franchisees, or partner capacity.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Booking, AWB, pickup, hub scan, bagging</li><li><svg class="ico"><use href="#i-check"/></svg>Manifest, linehaul dispatch, delivery ePOD</li><li><svg class="ico"><use href="#i-check"/></svg>NDR, RTO, billing, COD, margin tracking</li><li><svg class="ico"><use href="#i-check"/></svg>Own FTL, rented FTL, or PTL via co-loader</li><li><svg class="ico"><use href="#i-check"/></svg>Branch and multi-hub operations</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Guided Plan Recommendation')">Check fit &amp; price &#8594;</a></div>
     <div class="sol-card coloader"><p class="sol-tag">NEXOS Co-loader OS</p><h3>Co-loader / Linehaul Operators</h3><p>For operators selling shared linehaul, consolidation, airport handling, and handover/retrieval services to courier companies.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Party-to-Party and Party-to-Co-loader</li><li><svg class="ico"><use href="#i-check"/></svg>Co-loader-to-Co-loader and Co-loader-to-Party</li><li><svg class="ico"><use href="#i-check"/></svg>Airport lodgement and retrieval control</li><li><svg class="ico"><use href="#i-check"/></svg>Handover proof and responsibility engine</li><li><svg class="ico"><use href="#i-check"/></svg>Payable, receivable, and margin visibility</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Guided Plan Recommendation')">Check fit &amp; price &#8594;</a></div>
     <div class="sol-card courier"><p class="sol-tag">Courier Linehaul Config</p><h3>Courier Using Co-loader PTL</h3><p>For courier operators that book customers directly but buy PTL/shared linehaul capacity from co-loaders or other partners.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Courier booking remains under courier tenant</li><li><svg class="ico"><use href="#i-check"/></svg>PTL co-loader linehaul configured separately</li><li><svg class="ico"><use href="#i-check"/></svg>Partner handover and responsibility tracking</li><li><svg class="ico"><use href="#i-check"/></svg>Customer billing and co-loader payable split</li><li><svg class="ico"><use href="#i-check"/></svg>Margins visible by lane, shipment, and partner</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Guided Plan Recommendation')">Check fit &amp; price &#8594;</a></div>
-    <div class="sol-card hybrid"><p class="sol-tag">Co-loader Add-on</p><h3>Co-loader With Courier Ops</h3><p>For co-loaders who also operate direct courier booking and delivery as a separate business capability inside their own tenant.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Co-loader remains the primary tenant type</li><li><svg class="ico"><use href="#i-check"/></svg>Courier operations enabled as an add-on</li><li><svg class="ico"><use href="#i-check"/></svg>Separate workflows and controls by business line</li><li><svg class="ico"><use href="#i-check"/></svg>Unified users, attendance, and financial visibility</li><li><svg class="ico"><use href="#i-check"/></svg>Implementation-led setup, not blind self-serve</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Book a Demo')">Book demo &#8594;</a></div>
+    <div class="sol-card hybrid"><p class="sol-tag">Co-loader Add-on</p><h3>Co-loader With Courier Ops</h3><p>For co-loaders who also operate direct courier booking and delivery as a separate business capability inside their own tenant.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Co-loader remains the primary tenant type</li><li><svg class="ico"><use href="#i-check"/></svg>Courier operations enabled as an add-on</li><li><svg class="ico"><use href="#i-check"/></svg>Separate workflows and controls by business line</li><li><svg class="ico"><use href="#i-check"/></svg>Unified users, attendance, and financial visibility</li><li><svg class="ico"><use href="#i-check"/></svg>Implementation-led setup, not blind self-serve</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Request Founder Demo')">Request Founder Demo &#8594;</a></div>
   </div>
 </div>
 </section>
@@ -655,7 +725,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   <div class="fade-up">
     <p class="slabel">Why NEXOS</p>
     <h2 class="stitle">Built by operators. Not by coders.</h2>
-    <p class="ssub">NEXOS came from running a live B2B express logistics business across 9 Indian cities and with overall 20+ years of ground reality and experience — not from a generic product roadmap. Every workflow is shaped by real booking, pickup, hub, delivery, billing, and margin-control problems.</p>
+    <p class="ssub">NEXOS is shaped by structured workflow design for courier and co-loader operations — not inflated traction claims on a marketing site. Every workflow reflects real booking, pickup, hub, delivery, billing, and margin-control problems.</p>
   </div>
   <div class="why-grid fade-up">
     <div class="vs-card old"><h3><svg class="ico"><use href="#i-x"/></svg> How most operators work today</h3><ul class="vs-list">
@@ -683,7 +753,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     <div class="diff-card"><div class="diff-num">03</div><h4>Billing-First, Not Billing-Later</h4><p>Set up rate cards before your first shipment. Know your margins from day one &#8212; not as a quarterly surprise.</p></div>
     <div class="diff-card"><div class="diff-num">04</div><h4>Tenant-Isolated by Design</h4><p>Your data is never shared with other tenants. Even two NEXOS customers working together exchange data only through controlled paths.</p></div>
     <div class="diff-card"><div class="diff-num">05</div><h4>Built for Indian Realities</h4><p>Pre-printed labels, manual entry, Tally export, branch walk-in booking, offline mobile &#8212; supports how Indian operators actually work.</p></div>
-    <div class="diff-card"><div class="diff-num">06</div><h4>Fair, Transparent Pricing</h4><p>Public starting packages plus guided fitment. No per-AWB trap for core operations; add-ons, integrations, SMS, and advanced modules stay visible.</p></div>
+    <div class="diff-card"><div class="diff-num">06</div><h4>Guided Fitment Pricing</h4><p>Starting packages under finalisation. Final commercial proposal after fitment review — no public price numbers until scope is confirmed.</p></div>
   </div>
 </div>
 </section>
@@ -720,26 +790,63 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </div>
 </section>
 
+<!-- AI -->
+<section class="section" id="ai-approach" style="background:var(--surface)">
+<div class="container fade-up">
+  <p class="slabel">Product philosophy</p>
+  <h2 class="stitle">AI-assisted, not AI-dependent. Domain-intelligent by design.</h2>
+  <div class="ai-panel">
+    <p>NEXOS embeds logistics operating knowledge into workflows, validation gates, responsibility mapping, and audit trails. AI may assist with summaries, guidance, and exception review, but core operations remain rule-driven, deterministic, and reliable.</p>
+    <p>Core booking, movement, POD, COD, billing, and responsibility flows must continue to operate without AI.</p>
+    <div class="ai-callout"><strong>No API or AI dependency for core operations.</strong> NEXOS is BOS + rules + workflow first. AI is assistive, optional, and never required for daily operations.</div>
+  </div>
+</div>
+</section>
+
+<!-- PRODUCT PREVIEW -->
+<section class="section" id="product-preview">
+<div class="container">
+  <div class="fade-up">
+    <p class="slabel">Product Preview</p>
+    <h2 class="stitle">Operating areas prepared for pilot walkthroughs</h2>
+    <p class="ssub">Screenshots will be published only after branded demo-tenant review. The preview below shows the operating areas being prepared for pilot walkthroughs.</p>
+  </div>
+  <div class="preview-grid fade-up">
+    <article class="preview-card"><span class="preview-chip">Pilot preview</span><h4>Workspace</h4><p>Daily operating home for branch, hub, and control roles.</p></article>
+    <article class="preview-card"><span class="preview-chip">Workflow</span><h4>Tenant Setup Readiness</h4><p>Geography, gates, and go-live checklist before operations start.</p></article>
+    <article class="preview-card"><span class="preview-chip">Workflow</span><h4>City + Pincode Master</h4><p>Global pincode master with tenant serviceability overlays.</p></article>
+    <article class="preview-card"><span class="preview-chip">Workflow</span><h4>Facility + Lane Master</h4><p>Hubs, branches, gateways, and serviceable lane pairs.</p></article>
+    <article class="preview-card"><span class="preview-chip">Control</span><h4>Customer Master</h4><p>Contract, billing, GST, and shipment acceptance control.</p></article>
+    <article class="preview-card"><span class="preview-chip">Workflow</span><h4>Create Shipment</h4><p>Booking capture with validation gates before movement.</p></article>
+    <article class="preview-card"><span class="preview-chip">Control</span><h4>All Shipments</h4><p>Operational register with owner, status, and next action.</p></article>
+    <article class="preview-card"><span class="preview-chip">Control</span><h4>Co-loader Responsibility Engine</h4><p>Party and co-loader ownership across airport handovers.</p></article>
+    <article class="preview-card"><span class="preview-chip">Pilot preview</span><h4>Tracking</h4><p>Custody timeline with milestone proof and next operational step.</p></article>
+    <article class="preview-card"><span class="preview-chip">Audit</span><h4>Control Tower / Audit Trail</h4><p>SLA risk, exceptions, and governed operating events.</p></article>
+  </div>
+</div>
+</section>
+
 <!-- PRICING -->
 <section class="section" id="pricing-preview">
   <div class="container">
     <div class="section-head fade-up">
       <p class="slabel">Pricing</p>
-      <h2 class="stitle">Public starting packages. Guided fitment before final quote.</h2>
-      <p class="ssub">NEXOS shows starting packages clearly, but the correct operating system setup depends on business type, linehaul model, users, branches, shipment volume, COD, billing complexity, and co-loader dependency.</p>
+      <h2 class="stitle">Guided fitment quote</h2>
+      <p class="ssub">NEXOS pricing depends on business type, shipment volume, branch count, user roles, COD and billing complexity, co-loader usage, and required modules. Public package pricing is under finalisation. Early users can request a founder-led fitment review.</p>
     </div>
+    <p class="pricing-intro fade-up">Starting packages under finalisation · Final commercial proposal after fitment review</p>
 
     <div class="pricing-grid fade-up">
       <div class="price-card">
         <p class="price-name">NEXOS Courier OS</p>
         <h3>Courier Operators</h3>
         <p class="price-icp">For courier and express operators running booking, pickup, hub, delivery, POD, billing, and COD.</p>
-        <p class="price-value">Starting from ₹X/month</p>
+        <p class="price-value">Guided fitment quote</p>
         <div class="price-divider" aria-hidden="true"></div>
-        <p class="price-note">Includes up to Y users / Z shipments / basic branch setup. Additional users, branches, shipment bands, and advanced modules billed separately.</p>
+        <p class="price-note">Scope covers users, branches, shipment bands, COD, and modules. Final commercial proposal after fitment review.</p>
         <div class="price-actions">
-          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Check My Fit & Price</a>
-          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a>
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Request fitment review</a>
+          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
         </div>
       </div>
 
@@ -747,12 +854,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         <p class="price-name">NEXOS Co-loader OS</p>
         <h3>Co-loader Operators</h3>
         <p class="price-icp">For co-loaders managing shared linehaul, bagging, manifest, airport handover/retrieval, and settlement.</p>
-        <p class="price-value">Starting from ₹X/month</p>
+        <p class="price-value">Starting packages under finalisation</p>
         <div class="price-divider" aria-hidden="true"></div>
-        <p class="price-note">Includes core co-loader workflows and baseline lane setup. Additional lanes, users, integrations, and advanced settlement controls billed separately.</p>
+        <p class="price-note">Lanes, users, settlement controls, and co-loader responsibility complexity reviewed during fitment.</p>
         <div class="price-actions">
-          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Check My Fit & Price</a>
-          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a>
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Request fitment review</a>
+          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
         </div>
       </div>
 
@@ -760,12 +867,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         <p class="price-name">Courier + PTL Config</p>
         <h3>Courier Using Co-loaders</h3>
         <p class="price-icp">For courier operators using PTL/shared linehaul capacity from co-loaders or partner networks.</p>
-        <p class="price-value">Guided pricing</p>
+        <p class="price-value">Final commercial proposal after fitment review</p>
         <div class="price-divider" aria-hidden="true"></div>
-        <p class="price-note">Price depends on partner linehaul complexity, lanes, payable controls, settlement rules, and operational handover requirements.</p>
+        <p class="price-note">Partner linehaul complexity, payable controls, and handover rules shape the commercial scope.</p>
         <div class="price-actions">
-          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Check My Fit & Price</a>
-          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a>
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Request fitment review</a>
+          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a>
         </div>
       </div>
 
@@ -773,17 +880,17 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
         <p class="price-name">Co-loader + Courier Add-on</p>
         <h3>Co-loader With Courier Ops</h3>
         <p class="price-icp">For co-loaders that also run direct courier operations as an additional operating capability.</p>
-        <p class="price-value">Implementation-led quote</p>
+        <p class="price-value">Founder-led fitment review</p>
         <div class="price-divider" aria-hidden="true"></div>
-        <p class="price-note">Requires business-line separation, workflow configuration, permissions, rate setup, and tenant implementation review before quote.</p>
+        <p class="price-note">Business-line separation, permissions, and implementation scope confirmed before any commercial offer.</p>
         <div class="price-actions">
-          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Check My Fit & Price</a>
-          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a>
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Check My Fit & Price')">Request fitment review</a>
+          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a>
         </div>
       </div>
     </div>
 
-    <p class="pricing-footnote">Final commercial proposal is generated after fitment review. This prevents wrong-plan buying and avoids per-AWB pricing traps for small operators.</p>
+    <p class="pricing-footnote">We do not publish public pricing numbers on this website. Pilot participation and demo interest do not guarantee commercial access or production rollout.</p>
   </div>
 </section>
 
@@ -792,8 +899,43 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <div class="container">
   <div class="cs-badge" style="margin-bottom:28px">Launching Soon</div>
   <h2>Every shipment tracked. Every rupee accounted for.</h2>
-  <p>NEXOS is being built for Indian logistics operators who are ready to move beyond Excel, WhatsApp, and Tally.</p>
-  <a href="javascript:void(0)" class="btn-p" onclick="openNotify('Book a Demo')">Book a Demo <svg class="ico" style="width:15px;height:15px"><use href="#i-arrow"/></svg></a>
+  <p>NEXOS is being built for Indian logistics operators who are ready to move beyond Excel, WhatsApp, and Tally. Pilot interest is subject to fitment review.</p>
+  <div class="final-ctas">
+    <a href="javascript:void(0)" class="btn-p" onclick="openNotify('Request Founder Demo')">Request Founder Demo <svg class="ico" style="width:15px;height:15px"><use href="#i-arrow"/></svg></a>
+    <a href="javascript:void(0)" class="btn-s" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a>
+  </div>
+</div>
+</section>
+
+<!-- PRIVACY -->
+<section class="section" id="privacy" style="background:var(--surface)">
+<div class="container fade-up">
+  <p class="slabel">Legal</p>
+  <h2 class="stitle">Privacy Policy</h2>
+  <div class="legal-block">
+    <p><strong>Adyaya Solutions Private Limited</strong> (“NEXOS”) may collect name, company, email, mobile number, operating base, business type, shipment volume, current system or process details, and demo or pilot waitlist interest you submit through this website.</p>
+    <p>We use this information for demo scheduling, fitment review, pilot and waitlist communication, and product improvement. NEXOS does not sell lead or contact data.</p>
+    <p>Access is limited to authorised NEXOS/Adyaya personnel or authorised service providers who support hosting, communication, or product operations under confidentiality obligations.</p>
+    <p>You may request correction or deletion of contact information you submitted by writing to <a href="mailto:hello@nexos.co.in">hello@nexos.co.in</a>.</p>
+    <p style="font-size:13px;margin-top:20px">Last updated: May 2026</p>
+  </div>
+</div>
+</section>
+
+<!-- TERMS -->
+<section class="section" id="terms">
+<div class="container fade-up">
+  <p class="slabel">Legal</p>
+  <h2 class="stitle">General Terms</h2>
+  <div class="legal-block">
+    <p>This website is informational. NEXOS is in MVP, prototype, and pilot preparation stage.</p>
+    <p>Product availability, modules, workflows, pricing, pilot terms, and production use are subject to written confirmation between the parties.</p>
+    <p>Demo or pilot waitlist participation does not guarantee commercial access, production onboarding, or uninterrupted service.</p>
+    <p>NEXOS does not guarantee uninterrupted production service until a commercial agreement is signed and operational readiness is mutually confirmed.</p>
+    <p>Website content is not a binding commercial offer.</p>
+    <p>Questions: <a href="mailto:hello@nexos.co.in">hello@nexos.co.in</a></p>
+    <p style="font-size:13px;margin-top:20px">Last updated: May 2026</p>
+  </div>
 </div>
 </section>
 
@@ -801,7 +943,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <footer class="site-footer">
 <div class="container">
   <div class="footer-grid">
-    <div class="footer-brand"><a href="/" class="logo"><div class="logo-mark">N</div>NEXOS</a><p>Courier and Co-loader Operating System for Indian logistics operators.<br><span style="opacity:.6">By Adyaya Solutions Private Limited.</span></p></div>
+    <div class="footer-brand"><a href="/" class="logo"><div class="logo-mark">N</div>NEXOS</a><p>Courier and Co-loader Operating System for Indian logistics MSME operators.<br><span style="opacity:.6">By Adyaya Solutions Private Limited.</span></p></div>
     <div class="footer-col"><h4>Solutions</h4><ul>
       <li><a href="javascript:void(0)" onclick="showCS('Courier OS')">Courier OS <span class="soon-tag">Soon</span></a></li>
       <li><a href="javascript:void(0)" onclick="showCS('Co-loader OS')">Co-loader OS <span class="soon-tag">Soon</span></a></li>
@@ -814,12 +956,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     </ul></div>
     <div class="footer-col"><h4>Company</h4><ul>
       <li><a href="javascript:void(0)" onclick="openNotify('Contact Us')">Contact</a></li>
-      <li><a href="javascript:void(0)" onclick="openNotify('Book a Demo')">Book Demo</a></li>
+      <li><a href="javascript:void(0)" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a></li>
+      <li><a href="javascript:void(0)" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a></li>
       <li><a href="mailto:hello@nexos.co.in" style="font-family:'JetBrains Mono',monospace;font-size:11px">hello@nexos.co.in</a></li>
     </ul></div>
     <div class="footer-col"><h4>Legal</h4><ul>
-      <li><a href="javascript:void(0)" onclick="showCS('Privacy')">Privacy <span class="soon-tag">Soon</span></a></li>
-      <li><a href="javascript:void(0)" onclick="showCS('Terms')">Terms <span class="soon-tag">Soon</span></a></li>
+      <li><a href="#privacy">Privacy Policy</a></li>
+      <li><a href="#terms">General Terms</a></li>
     </ul></div>
   </div>
   <div class="footer-bottom"><span>&#169; 2026 Adyaya Solutions Private Limited. All rights reserved.</span><div class="footer-legal"><span>NEXOS&#8482;</span><span>nexos.co.in</span></div></div>
@@ -835,7 +978,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </div></div>
 
 <!-- NOTIFY MODAL -->
-<div class="modal-overlay" id="notifyModal" onclick="hideNotify()"><div class="modal-box" onclick="event.stopPropagation()" style="text-align:left;max-width:520px">
+<div class="modal-overlay" id="notifyModal" onclick="hideNotify()"><div class="modal-box notify-modal" onclick="event.stopPropagation()">
   <div style="text-align:center;margin-bottom:20px">
     <div class="cs-badge" style="margin-bottom:14px" id="notifyBadge">Early Access</div>
     <h3 id="notifyTitle" style="margin-bottom:6px">Get Notified</h3>
@@ -855,9 +998,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
       <div><label>Current System</label><select id="nf-system"><option value="">Select...</option><option>Excel / WhatsApp</option><option>Tally + Manual</option><option>Local Courier Software</option><option>Custom Software</option><option>Other</option></select></div>
     </div>
     <div style="display:flex;align-items:flex-start;gap:8px;margin-top:2px"><input type="checkbox" id="nf-consent" style="margin-top:3px;width:auto"><label for="nf-consent" style="font-size:11px;color:var(--ink-muted);font-weight:400">I consent to be contacted by Adyaya Solutions regarding NEXOS. My data will not be shared with third parties.</label></div>
-    <div style="display:flex;gap:10px;margin-top:6px">
-      <button class="btn-p" id="notifySubmitBtn" onclick="submitNotify()" style="flex:1;justify-content:center">Submit Interest</button>
-      <button class="btn-s" onclick="hideNotify()">Cancel</button>
+    <div class="notify-actions">
+      <button class="btn-p" id="notifySubmitBtn" type="button" onclick="submitNotify()">Submit Interest</button>
+      <button class="btn-s" type="button" onclick="hideNotify()">Cancel</button>
     </div>
     <p id="notifyErr" style="display:none;color:var(--error);font-size:12px;margin-top:6px;text-align:center"></p>
   </div></div>
@@ -888,17 +1031,18 @@ function showCS(name){document.getElementById('csTitle').textContent=name+' \u20
 function hideCS(){document.getElementById('csModal').classList.remove('active');document.body.style.overflow=''}
 
 var NOTIFY_CONFIG={
-  'Check My Fit & Price':{badge:'Fit & Price',title:'Check My Fit & Price',subtitle:'Tell us about your operation. We will recommend the right NEXOS package and price band.',emailTo:['sales@nexos.co.in'],subject:'NEXOS Fit and Price Request',btnLabel:'Submit Fit & Price Request'},
-  'Pricing Updates':{badge:'Pricing',title:'Get Pricing Updates',subtitle:'Be the first to know when NEXOS pricing is finalized.',emailTo:['sales@nexos.co.in'],subject:'NEXOS Pricing Interest',btnLabel:'Get Pricing Updates'},
-  'Book a Demo':{badge:'Book a Demo',title:'Book a Demo',subtitle:'Tell us about your operations. We will set up a personalized walkthrough.',emailTo:['demo@nexos.co.in','sales@nexos.co.in'],subject:'NEXOS Demo Request',btnLabel:'Submit Demo Request'},
-  'Book Demo':{badge:'Book a Demo',title:'Book a Demo',subtitle:'Tell us about your operations. We will set up a personalized walkthrough.',emailTo:['demo@nexos.co.in','sales@nexos.co.in'],subject:'NEXOS Demo Request',btnLabel:'Submit Demo Request'},
+  'Check My Fit & Price':{badge:'Fit & Price',title:'Check My Fit & Price',subtitle:'Tell us about your operation. We will recommend the right NEXOS scope and conduct a founder-led fitment review.',emailTo:['sales@nexos.co.in'],subject:'NEXOS Fit and Price Request',btnLabel:'Request fitment review'},
+  'Guided Plan Recommendation':{badge:'Fit & Price',title:'Guided Plan Recommendation',subtitle:'Tell us about your operation. We will recommend the right NEXOS scope and conduct a founder-led fitment review.',emailTo:['sales@nexos.co.in'],subject:'NEXOS Fit and Price Request',btnLabel:'Submit Fit & Price Request'},
+  'Pricing Updates':{badge:'Pricing',title:'Get Pricing Updates',subtitle:'Be the first to know when NEXOS public package pricing is finalised.',emailTo:['sales@nexos.co.in'],subject:'NEXOS Pricing Interest',btnLabel:'Get Pricing Updates'},
+  'Request Founder Demo':{badge:'Request Founder Demo',title:'Request Founder Demo',subtitle:'Tell us about your courier or co-loader operation. We will review fitment and schedule a founder-led walkthrough.',emailTo:['demo@nexos.co.in','sales@nexos.co.in'],subject:'NEXOS Founder Demo Request',btnLabel:'Submit Demo Request'},
+  'Join Pilot Waitlist':{badge:'Join Pilot Waitlist',title:'Join Pilot Waitlist',subtitle:'Share your operating model and pilot interest. We will review fitment before inviting pilot users.',emailTo:['hello@nexos.co.in','sales@nexos.co.in'],subject:'NEXOS Pilot Waitlist Request',btnLabel:'Join Pilot Waitlist'},
   'Contact Us':{badge:'Contact Us',title:'Get in Touch',subtitle:'Have a question about NEXOS? Drop us a note.',emailTo:['hello@nexos.co.in','sales@nexos.co.in'],subject:'NEXOS Contact Enquiry',btnLabel:'Send Enquiry'},
-  'Sales Enquiry':{badge:'Sales',title:'Talk to Sales',subtitle:'Share your requirement. Our sales team will respond.',emailTo:['sales@nexos.co.in'],subject:'NEXOS Sales Enquiry',btnLabel:'Send Sales Enquiry'}
+  'Sales Enquiry':{badge:'Sales',title:'Talk to Sales',subtitle:'Share your requirement. Our team will respond after fitment review.',emailTo:['sales@nexos.co.in'],subject:'NEXOS Sales Enquiry',btnLabel:'Send Sales Enquiry'}
 };
-var currentCtx='Book a Demo';
+var currentCtx='Request Founder Demo';
 
 function openNotify(ctx){
-  currentCtx=ctx;var cfg=NOTIFY_CONFIG[ctx]||NOTIFY_CONFIG['Book a Demo'];
+  currentCtx=ctx;var cfg=NOTIFY_CONFIG[ctx]||NOTIFY_CONFIG['Request Founder Demo'];
   document.getElementById('notifyBadge').textContent=cfg.badge;
   document.getElementById('notifyTitle').textContent=cfg.title;
   document.getElementById('notifySubtitle').textContent=cfg.subtitle;
@@ -924,7 +1068,7 @@ function submitNotify(){
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){err.textContent='Please enter a valid email address.';err.style.display='block';return}
   if(!con){err.textContent='Please provide consent to be contacted.';err.style.display='block';return}
   err.style.display='none';
-  var cfg=NOTIFY_CONFIG[currentCtx]||NOTIFY_CONFIG['Book a Demo'],ts=new Date().toISOString();
+  var cfg=NOTIFY_CONFIG[currentCtx]||NOTIFY_CONFIG['Request Founder Demo'],ts=new Date().toISOString();
   var lead={ctx:currentCtx,name:n,company:c,email:e,mobile:m,city:ci,type:t,linehaul:lh,volume:vol,system:s,ts:ts,source:window.location.href};
   var leads=JSON.parse(localStorage.getItem('nexos-leads')||'[]');leads.push(lead);localStorage.setItem('nexos-leads',JSON.stringify(leads));
   console.log('[NEXOS Lead]',lead);
