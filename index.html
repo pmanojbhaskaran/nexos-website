@@ -293,8 +293,18 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .price-note{min-height:72px}
 .price-actions{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch}
 .price-actions .btn-p,.price-actions .btn-s{width:100%;justify-content:center;text-align:center;white-space:nowrap;padding-left:10px;padding-right:10px}
-.nav-links .btn-p{color:#fff!important;background:var(--teal)!important;border:1px solid var(--teal)!important}
-[data-theme="dark"] .nav-links .btn-p{color:#061614!important;background:#7DD3CF!important;border-color:#7DD3CF!important}
+.nav-links .btn-p,.nav-actions .btn-p{color:#fff!important;background:var(--teal)!important;border:1px solid var(--teal)!important}
+[data-theme="dark"] .nav-links .btn-p,[data-theme="dark"] .nav-actions .btn-p{color:#061614!important;background:#7DD3CF!important;border-color:#7DD3CF!important}
+/* Header CTA spacing + hierarchy */
+.nav-actions{gap:10px}
+.nav-actions .btn-s,.nav-actions .btn-p{white-space:nowrap}
+.nav-actions .btn-s{padding:11px 18px}
+.nav-actions .btn-p{padding:11px 20px;margin-left:2px;box-shadow:var(--shadow-sm)}
+@media(min-width:769px) and (max-width:1024px){
+  .nav-links{gap:20px}
+  .nav-actions{gap:8px}
+  .nav-actions .btn-s,.nav-actions .btn-p{padding:10px 14px;font-size:13px}
+}
 [data-theme="dark"] .problem,[data-theme="dark"] .final-cta{color:#F0EDE6}
 [data-theme="dark"] .problem .stitle,[data-theme="dark"] .final-cta h2{color:#F0EDE6!important}
 [data-theme="dark"] .problem .ssub,[data-theme="dark"] .final-cta p{color:#D4D0C8!important;opacity:1!important}

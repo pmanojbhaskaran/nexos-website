@@ -6,53 +6,60 @@
 <title>Start Free Trial &middot; NEXOS</title>
 <meta name="description" content="Create your NEXOS workspace and tenant admin account.">
 <link rel="canonical" href="https://www.nexos.co.in/signup.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#0B1121; --card:#121A2E; --line:rgba(255,255,255,.12);
-    --muted:#9AA4B8; --gold:#C9A84C; --gold-d:#B8973B; --ok:#3FB984; --err:#E5736B;
-    --field:rgba(255,255,255,.06);
+    --teal:#01696F; --teal-dark:#0C4E54; --teal-soft:rgba(1,105,111,0.06); --courier-border:rgba(1,105,111,0.15);
+    --ivory:#F7F6F2; --surface:#F9F8F5; --card:#FFFFFF;
+    --ink:#28251D; --ink-soft:#3D3A32; --muted:#7A7974;
+    --line:#D4D1CA; --line-light:#E8E6E0; --field:#F9F8F5;
+    --ok:#437A22; --err:#A12C7B;
+    --shadow-sm:0 1px 3px rgba(40,37,29,0.05); --shadow-lg:0 12px 40px rgba(40,37,29,0.1);
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:'Satoshi',system-ui,-apple-system,Segoe UI,sans-serif;background:
-    radial-gradient(1200px 600px at 50% -10%,#16203a 0%,var(--ink) 55%) fixed; color:#F4F6FA;
-    min-height:100vh;display:flex;flex-direction:column;align-items:center}
-  a{color:var(--gold);text-decoration:none}
+  body{margin:0;font-family:'Satoshi',Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:
+    radial-gradient(1200px 600px at 50% -10%,var(--surface) 0%,var(--ivory) 55%) fixed; color:var(--ink);
+    -webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column;align-items:center}
+  a{color:var(--teal);text-decoration:none;font-weight:600}
   header{width:100%;max-width:1100px;display:flex;align-items:center;justify-content:space-between;padding:22px 24px}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:#fff}
-  .logo-mark{width:30px;height:30px;border-radius:8px;background:var(--gold);color:var(--ink);
-    display:grid;place-items:center;font-weight:800}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--ink);letter-spacing:-.3px}
+  .logo-mark{width:30px;height:30px;border-radius:7px;background:var(--teal);color:#fff;
+    font-family:'JetBrains Mono',monospace;display:grid;place-items:center;font-weight:700}
   .wrap{width:100%;max-width:480px;padding:8px 24px 64px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 28px;
-    box-shadow:0 24px 60px rgba(0,0,0,.35)}
-  h1{font-size:24px;margin:0 0 6px}
+    box-shadow:var(--shadow-lg)}
+  h1{font-size:24px;margin:0 0 6px;letter-spacing:-.5px}
   .sub{color:var(--muted);font-size:14px;margin:0 0 22px;line-height:1.5}
   .steps{display:flex;gap:8px;margin-bottom:24px}
-  .steps .dot{flex:1;height:4px;border-radius:99px;background:rgba(255,255,255,.12)}
-  .steps .dot.on{background:var(--gold)}
-  label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:#D8DEEA}
-  .req{color:var(--gold)}
-  input,select{width:100%;padding:11px 13px;background:var(--field);border:1px solid var(--line);
-    border-radius:10px;color:#fff;font-size:14px;font-family:inherit;outline:none}
-  input:focus,select:focus{border-color:var(--gold)}
+  .steps .dot{flex:1;height:4px;border-radius:99px;background:var(--line-light)}
+  .steps .dot.on{background:var(--teal)}
+  label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:var(--ink-soft)}
+  .req{color:var(--teal)}
+  input,select{width:100%;padding:11px 13px;background:var(--field);border:1.5px solid var(--line);
+    border-radius:10px;color:var(--ink);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s}
+  input:focus,select:focus{border-color:var(--teal)}
+  input::placeholder{color:var(--muted)}
   select option{color:#000}
   .row{display:flex;gap:12px}
   .row>div{flex:1}
   .otp{text-align:center;letter-spacing:.5em;font-size:22px;font-weight:700}
-  .btn{width:100%;margin-top:22px;padding:12px;border:none;border-radius:10px;background:var(--gold);
-    color:var(--ink);font-weight:700;font-size:15px;cursor:pointer;transition:background .15s}
-  .btn:hover{background:var(--gold-d)}
-  .btn:disabled{opacity:.55;cursor:not-allowed}
-  .ghost{background:none;border:1px solid var(--line);color:#D8DEEA;margin-top:12px}
-  .ghost:hover{background:rgba(255,255,255,.06)}
+  .btn{width:100%;margin-top:22px;padding:13px;border:none;border-radius:10px;background:var(--teal);
+    color:#fff;font-weight:600;font-size:15px;cursor:pointer;transition:background .2s,transform .2s,box-shadow .2s}
+  .btn:hover{background:var(--teal-dark);transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+  .btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+  .ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink);margin-top:12px}
+  .ghost:hover{background:var(--teal-soft);border-color:var(--muted);transform:none;box-shadow:none}
   .msg{margin-top:16px;padding:11px 13px;border-radius:10px;font-size:13px;display:none}
-  .msg.err{display:block;background:rgba(229,115,107,.12);border:1px solid rgba(229,115,107,.4);color:#F1A9A3}
-  .msg.ok{display:block;background:rgba(63,185,132,.12);border:1px solid rgba(63,185,132,.4);color:#9EE3C4}
+  .msg.err{display:block;background:rgba(161,44,123,.08);border:1px solid rgba(161,44,123,.3);color:var(--err)}
+  .msg.ok{display:block;background:rgba(67,122,34,.08);border:1px solid rgba(67,122,34,.3);color:var(--ok)}
   .hint{font-size:12px;color:var(--muted);margin-top:6px}
   .foot{text-align:center;margin-top:18px;font-size:13px;color:var(--muted)}
   .hidden{display:none}
-  .success-ico{width:54px;height:54px;border-radius:50%;background:rgba(63,185,132,.15);
+  .success-ico{width:54px;height:54px;border-radius:50%;background:rgba(67,122,34,.12);color:var(--ok);
     display:grid;place-items:center;margin:0 auto 14px;font-size:26px}
 </style>
 </head>
