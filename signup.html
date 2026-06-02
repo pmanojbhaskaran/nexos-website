@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start Free Trial &middot; NEXOS</title>
+<meta name="description" content="Create your NEXOS workspace and tenant admin account.">
+<link rel="canonical" href="https://www.nexos.co.in/signup.html">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B1121; --card:#121A2E; --line:rgba(255,255,255,.12);
+    --muted:#9AA4B8; --gold:#C9A84C; --gold-d:#B8973B; --ok:#3FB984; --err:#E5736B;
+    --field:rgba(255,255,255,.06);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Satoshi',system-ui,-apple-system,Segoe UI,sans-serif;background:
+    radial-gradient(1200px 600px at 50% -10%,#16203a 0%,var(--ink) 55%) fixed; color:#F4F6FA;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center}
+  a{color:var(--gold);text-decoration:none}
+  header{width:100%;max-width:1100px;display:flex;align-items:center;justify-content:space-between;padding:22px 24px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:#fff}
+  .logo-mark{width:30px;height:30px;border-radius:8px;background:var(--gold);color:var(--ink);
+    display:grid;place-items:center;font-weight:800}
+  .wrap{width:100%;max-width:480px;padding:8px 24px 64px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 28px;
+    box-shadow:0 24px 60px rgba(0,0,0,.35)}
+  h1{font-size:24px;margin:0 0 6px}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 22px;line-height:1.5}
+  .steps{display:flex;gap:8px;margin-bottom:24px}
+  .steps .dot{flex:1;height:4px;border-radius:99px;background:rgba(255,255,255,.12)}
+  .steps .dot.on{background:var(--gold)}
+  label{display:block;font-size:13px;font-weight:600;margin:14px 0 6px;color:#D8DEEA}
+  .req{color:var(--gold)}
+  input,select{width:100%;padding:11px 13px;background:var(--field);border:1px solid var(--line);
+    border-radius:10px;color:#fff;font-size:14px;font-family:inherit;outline:none}
+  input:focus,select:focus{border-color:var(--gold)}
+  select option{color:#000}
+  .row{display:flex;gap:12px}
+  .row>div{flex:1}
+  .otp{text-align:center;letter-spacing:.5em;font-size:22px;font-weight:700}
+  .btn{width:100%;margin-top:22px;padding:12px;border:none;border-radius:10px;background:var(--gold);
+    color:var(--ink);font-weight:700;font-size:15px;cursor:pointer;transition:background .15s}
+  .btn:hover{background:var(--gold-d)}
+  .btn:disabled{opacity:.55;cursor:not-allowed}
+  .ghost{background:none;border:1px solid var(--line);color:#D8DEEA;margin-top:12px}
+  .ghost:hover{background:rgba(255,255,255,.06)}
+  .msg{margin-top:16px;padding:11px 13px;border-radius:10px;font-size:13px;display:none}
+  .msg.err{display:block;background:rgba(229,115,107,.12);border:1px solid rgba(229,115,107,.4);color:#F1A9A3}
+  .msg.ok{display:block;background:rgba(63,185,132,.12);border:1px solid rgba(63,185,132,.4);color:#9EE3C4}
+  .hint{font-size:12px;color:var(--muted);margin-top:6px}
+  .foot{text-align:center;margin-top:18px;font-size:13px;color:var(--muted)}
+  .hidden{display:none}
+  .success-ico{width:54px;height:54px;border-radius:50%;background:rgba(63,185,132,.15);
+    display:grid;place-items:center;margin:0 auto 14px;font-size:26px}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="/"><span class="logo-mark">N</span>NEXOS</a>
+  <a href="/" style="font-size:14px;color:var(--muted)">&larr; Back to site</a>
+</header>
+
+<div class="wrap">
+  <div class="card">
+    <div class="steps">
+      <div class="dot on" id="d1"></div>
+      <div class="dot" id="d2"></div>
+      <div class="dot" id="d3"></div>
+    </div>
+
+    <!-- STEP 1: ACCOUNT -->
+    <section id="step-account">
+      <h1>Start your free trial</h1>
+      <p class="sub">One signup creates your tenant workspace and your tenant admin account.</p>
+
+      <label>Company legal name <span class="req">*</span></label>
+      <input id="legalName" type="text" placeholder="Acme Logistics Pvt Ltd" autocomplete="organization">
+
+      <label>Workspace display name <span class="req">*</span></label>
+      <input id="displayName" type="text" placeholder="Acme Logistics">
+
+      <label>Trade / brand name</label>
+      <input id="brandName" type="text" placeholder="Acme Express (optional)">
+      <p class="hint">Shown to your customers. Stored on your legal entity.</p>
+
+      <label>Work email <span class="req">*</span></label>
+      <input id="email" type="email" placeholder="you@company.com" autocomplete="email">
+
+      <div class="row">
+        <div>
+          <label>Mobile (India)</label>
+          <input id="phone" type="tel" placeholder="9876543210" inputmode="numeric">
+        </div>
+        <div>
+          <label>Business size <span class="req">*</span></label>
+          <select id="msmeBand">
+            <option value="MSME_MICRO">Micro (MSME)</option>
+            <option value="MSME_SMALL">Small (MSME)</option>
+            <option value="MSME_MEDIUM">Medium (MSME)</option>
+            <option value="LARGE">Large</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn" id="btnInitiate" onclick="doInitiate()">Send verification code</button>
+      <div class="msg" id="msg1"></div>
+      <p class="foot">Already have an account? <a href="#" onclick="goApp('/signin');return false;">Sign in</a></p>
+    </section>
+
+    <!-- STEP 2: OTP -->
+    <section id="step-otp" class="hidden">
+      <h1>Verify your email</h1>
+      <p class="sub">We sent a 6-digit code to <strong id="otpEmail"></strong>. Enter it below.</p>
+
+      <label>Verification code <span class="req">*</span></label>
+      <input id="otp" class="otp" type="text" maxlength="6" inputmode="numeric" placeholder="000000">
+
+      <button class="btn" id="btnVerify" onclick="doVerify()">Verify email</button>
+      <button class="btn ghost" id="btnResend" onclick="doResend()">Resend code</button>
+      <div class="msg" id="msg2"></div>
+    </section>
+
+    <!-- STEP 3: PASSWORD -->
+    <section id="step-password" class="hidden">
+      <h1>Set your password</h1>
+      <p class="sub">This secures your tenant admin account.</p>
+
+      <label>Password <span class="req">*</span></label>
+      <input id="password" type="password" placeholder="At least 8 characters" autocomplete="new-password">
+
+      <label>Confirm password <span class="req">*</span></label>
+      <input id="confirm" type="password" placeholder="Re-enter password" autocomplete="new-password">
+
+      <button class="btn" id="btnComplete" onclick="doComplete()">Create my workspace</button>
+      <div class="msg" id="msg3"></div>
+    </section>
+
+    <!-- STEP 4: DONE -->
+    <section id="step-done" class="hidden" style="text-align:center">
+      <div class="success-ico">&#10003;</div>
+      <h1>Workspace created</h1>
+      <p class="sub">Your tenant is provisioned and your admin account is ready. Continue to the app to finish onboarding.</p>
+      <p class="hint" id="tenantLine"></p>
+      <button class="btn" id="btnGo" onclick="goToApp()">Continue to onboarding</button>
+    </section>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var isLocal = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+  var params = new URLSearchParams(location.search);
+  // API + app bases are env-detectable and overridable via ?api= / ?app= for testing.
+  var API_BASE = params.get("api") || (isLocal ? "http://localhost:3001/api" : "https://api.nexos.co.in/api");
+  var APP_BASE = params.get("app") || (isLocal ? "http://localhost:3000" : "https://app.nexos.co.in");
+
+  var state = { sessionId: null, email: null, result: null };
+
+  window.goApp = function (path) { window.location.href = APP_BASE + (path || "/"); };
+
+  function $(id) { return document.getElementById(id); }
+  function show(id) {
+    ["step-account", "step-otp", "step-password", "step-done"].forEach(function (s) {
+      $(s).classList.toggle("hidden", s !== id);
+    });
+  }
+  function setDots(n) { ["d1", "d2", "d3"].forEach(function (d, i) { $(d).classList.toggle("on", i < n); }); }
+  function msg(el, text, kind) {
+    var m = $(el);
+    m.textContent = text || "";
+    m.className = "msg" + (text ? " " + kind : "");
+  }
+  function busy(btn, on, label) {
+    var b = $(btn);
+    b.disabled = on;
+    if (on) { b.dataset.label = b.textContent; b.textContent = "Please wait\u2026"; }
+    else if (b.dataset.label) { b.textContent = b.dataset.label; }
+    if (label) b.dataset.label = label;
+  }
+  function unwrap(json) { return json && json.data !== undefined ? json.data : json; }
+  function errorMessage(json, fallback) {
+    if (json && json.errors && json.errors.length) return json.errors[0].message || fallback;
+    if (json && json.message) return Array.isArray(json.message) ? json.message.join("; ") : json.message;
+    return fallback;
+  }
+
+  async function post(path, body) {
+    var res, json;
+    try {
+      res = await fetch(API_BASE + path, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+    } catch (e) {
+      throw new Error("Could not reach the server. Please check your connection and try again.");
+    }
+    try { json = await res.json(); } catch (e) { json = null; }
+    if (!res.ok) throw new Error(errorMessage(json, "Request failed (HTTP " + res.status + ")"));
+    return unwrap(json);
+  }
+
+  window.doInitiate = async function () {
+    msg("msg1", "", "");
+    var legalName = $("legalName").value.trim();
+    var displayName = $("displayName").value.trim();
+    var email = $("email").value.trim();
+    if (legalName.length < 2) return msg("msg1", "Enter your company legal name.", "err");
+    if (displayName.length < 2) return msg("msg1", "Enter a workspace display name.", "err");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return msg("msg1", "Enter a valid work email.", "err");
+
+    var payload = {
+      email: email,
+      legalName: legalName,
+      displayName: displayName,
+      msmeBand: $("msmeBand").value,
+      flowType: "INTEGRATED_E2E"
+    };
+    var brand = $("brandName").value.trim();
+    if (brand) { payload.brandName = brand; payload.useBrandNameForDisplay = false; }
+    var phone = $("phone").value.replace(/\D/g, "");
+    if (phone) payload.phone = phone;
+
+    busy("btnInitiate", true);
+    try {
+      var data = await post("/signup/initiate", payload);
+      state.sessionId = data.signupSessionId;
+      state.email = email;
+      $("otpEmail").textContent = email;
+      show("step-otp"); setDots(2);
+    } catch (e) {
+      msg("msg1", e.message, "err");
+    } finally { busy("btnInitiate", false); }
+  };
+
+  window.doVerify = async function () {
+    msg("msg2", "", "");
+    var otp = $("otp").value.trim();
+    if (otp.length < 6) return msg("msg2", "Enter the 6-digit code.", "err");
+    busy("btnVerify", true);
+    try {
+      await post("/signup/otp/verify", { signupSessionId: state.sessionId, otp: otp });
+      show("step-password"); setDots(3);
+    } catch (e) {
+      msg("msg2", e.message, "err");
+    } finally { busy("btnVerify", false); }
+  };
+
+  window.doResend = async function () {
+    msg("msg2", "", "");
+    busy("btnResend", true);
+    try {
+      await post("/signup/otp/resend", { signupSessionId: state.sessionId });
+      msg("msg2", "A new code has been sent.", "ok");
+    } catch (e) {
+      msg("msg2", e.message, "err");
+    } finally { busy("btnResend", false); }
+  };
+
+  window.doComplete = async function () {
+    msg("msg3", "", "");
+    var pw = $("password").value;
+    var cf = $("confirm").value;
+    if (pw.length < 8) return msg("msg3", "Password must be at least 8 characters.", "err");
+    if (pw !== cf) return msg("msg3", "Passwords do not match.", "err");
+    busy("btnComplete", true);
+    try {
+      var data = await post("/signup/complete", { signupSessionId: state.sessionId, password: pw });
+      state.result = data;
+      $("tenantLine").textContent = "Tenant " + (data.tenantCode || data.tenantId || "");
+      show("step-done"); setDots(3);
+    } catch (e) {
+      msg("msg3", e.message, "err");
+    } finally { busy("btnComplete", false); }
+  };
+
+  // Hand off the new session to the app (exeed-bos-web) for post-sign-in onboarding.
+  // Tokens are passed in the URL fragment (not query) so they are not logged server-side.
+  window.goToApp = function () {
+    var r = state.result || {};
+    var frag = new URLSearchParams();
+    if (r.accessToken) frag.set("accessToken", r.accessToken);
+    if (r.refreshToken) frag.set("refreshToken", r.refreshToken);
+    if (r.tenantId) frag.set("tenantId", r.tenantId);
+    if (r.tenantCode) frag.set("tenantCode", r.tenantCode);
+    frag.set("source", "signup");
+    window.location.href = APP_BASE + "/onboarding#" + frag.toString();
+  };
+})();
+</script>
+</body>
+</html>
