@@ -150,7 +150,8 @@
       <h1>Workspace created</h1>
       <p class="sub">Your tenant is provisioned and your admin account is ready. Continue to the app to finish onboarding.</p>
       <p class="hint" id="tenantLine"></p>
-      <button class="btn" id="btnGo" onclick="goToApp()">Continue to onboarding</button>
+      <button class="btn" id="btnGo" onclick="goToApp()" disabled>Continue to onboarding</button>
+      <div class="msg" id="msgDone"></div>
     </section>
   </div>
 </div>
@@ -188,6 +189,20 @@
     if (label) b.dataset.label = label;
   }
   function unwrap(json) { return json && json.data !== undefined ? json.data : json; }
+
+  // Access gate: a completed signup may only hand off to the app when the
+  // server returns valid tokens AND a usable subscription (TRIAL or ACTIVE).
+  // Org/billing-only signups (no subscription) must NOT pass tokens to the app.
+  function computeAccessReady(data) {
+    if (!data) return false;
+    if (!data.accessToken) return false;
+    if (!data.refreshToken) return false;
+    if (!data.subscription) return false;
+    if (!data.subscription.id) return false;
+    if (data.subscription.id === "PENDING") return false;
+    var s = data.subscription.status;
+    return s === "TRIAL" || s === "ACTIVE";
+  }
   function errorMessage(json, fallback) {
     if (json && json.errors && json.errors.length) return json.errors[0].message || fallback;
     if (json && json.message) return Array.isArray(json.message) ? json.message.join("; ") : json.message;
@@ -276,9 +291,21 @@
     busy("btnComplete", true);
     try {
       var data = await post("/signup/complete", { signupSessionId: state.sessionId, password: pw });
-      state.result = data;
       $("tenantLine").textContent = "Tenant " + (data.tenantCode || data.tenantId || "");
       show("step-done"); setDots(3);
+
+      if (computeAccessReady(data)) {
+        // Subscription access confirmed: store result and enable app handoff.
+        state.result = data;
+        $("btnGo").disabled = false;
+        msg("msgDone", "", "");
+      } else {
+        // Org/billing exist but subscription access is not valid yet:
+        // do NOT store tokens, keep handoff blocked.
+        state.result = null;
+        $("btnGo").disabled = true;
+        msg("msgDone", "Access held: subscription is not ready. Workspace onboarding will not open until subscription access is confirmed.", "err");
+      }
     } catch (e) {
       msg("msg3", e.message, "err");
     } finally { busy("btnComplete", false); }
@@ -287,7 +314,13 @@
   // Hand off the new session to the app (exeed-bos-web) for post-sign-in onboarding.
   // Tokens are passed in the URL fragment (not query) so they are not logged server-side.
   window.goToApp = function () {
-    var r = state.result || {};
+    var r = state.result;
+    if (!computeAccessReady(r)) {
+      $("btnGo").disabled = true;
+      msg("msgDone", "Access held: subscription is not ready. Workspace onboarding will not open until subscription access is confirmed.", "err");
+      alert("Access held: subscription is not ready. Workspace onboarding will not open until subscription access is confirmed.");
+      return;
+    }
     var frag = new URLSearchParams();
     if (r.accessToken) frag.set("accessToken", r.accessToken);
     if (r.refreshToken) frag.set("refreshToken", r.refreshToken);
