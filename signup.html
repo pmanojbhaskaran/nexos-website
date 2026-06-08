@@ -111,6 +111,15 @@
         </div>
       </div>
 
+      <label>Business type <span class="req">*</span></label>
+      <select id="businessTypeCode">
+        <option value="">Select your operating model</option>
+        <option value="COURIER">Courier operator</option>
+        <option value="COLOADER">Co-loader</option>
+        <option value="COLOADER_AND_COURIER">Courier + Co-loader</option>
+      </select>
+      <p class="hint">This is locked after workspace creation because it controls pricing, entitlements, modules, onboarding milestones, and workspace visibility.</p>
+
       <button class="btn" id="btnInitiate" onclick="doInitiate()">Send verification code</button>
       <div class="msg" id="msg1"></div>
       <p class="foot">Already have an account? <a href="#" onclick="goApp('/signin');return false;">Sign in</a></p>
@@ -233,12 +242,15 @@
     if (legalName.length < 2) return msg("msg1", "Enter your company legal name.", "err");
     if (displayName.length < 2) return msg("msg1", "Enter a workspace display name.", "err");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return msg("msg1", "Enter a valid work email.", "err");
+    var businessTypeCode = $("businessTypeCode").value;
+    if (["COURIER", "COLOADER", "COLOADER_AND_COURIER"].indexOf(businessTypeCode) < 0) return msg("msg1", "Select your business type.", "err");
 
     var payload = {
       email: email,
       legalName: legalName,
       displayName: displayName,
       msmeBand: $("msmeBand").value,
+      businessTypeCode: businessTypeCode,
       flowType: "INTEGRATED_E2E"
     };
     var brand = $("brandName").value.trim();
