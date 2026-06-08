@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Start Free Trial &middot; NEXOS</title>
+<title>Start Free Trial / Subscribe &middot; NEXOS</title>
 <meta name="description" content="Create your NEXOS workspace and tenant admin account.">
 <link rel="canonical" href="https://www.nexos.co.in/signup.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,8 +79,8 @@
 
     <!-- STEP 1: ACCOUNT -->
     <section id="step-account">
-      <h1>Start your free trial</h1>
-      <p class="sub">One signup creates your tenant workspace and your tenant admin account.</p>
+      <h1>Start Free Trial / Subscribe</h1>
+      <p class="sub">Choose how you want to start. Trial opens the workspace after OTP. Subscribe records payment-required status until payment integration is completed.</p>
 
       <label>Company legal name <span class="req">*</span></label>
       <input id="legalName" type="text" placeholder="Acme Logistics Pvt Ltd" autocomplete="organization">
@@ -111,6 +111,30 @@
         </div>
       </div>
 
+      <label>Start path <span class="req">*</span></label>
+      <select id="commercialIntent" onchange="syncCommercialIntent()">
+        <option value="TRIAL">Start Free Trial</option>
+        <option value="PAID">Subscribe Now</option>
+      </select>
+      <p class="hint">Trial starts without payment. Subscribe locks the plan and billing cycle, then waits for payment activation.</p>
+
+      <label>Plan <span class="req">*</span></label>
+      <select id="planCode">
+        <option value="SCALE_MONTHLY_E2E">Scale</option>
+        <option value="GROWTH_MONTHLY_E2E">Growth</option>
+        <option value="STARTER_MONTHLY_E2E">Starter</option>
+        <option value="ENTERPRISE_CUSTOM_E2E">Enterprise / Custom</option>
+      </select>
+      <p class="hint">Plan selection is captured now. Paid activation remains blocked until the payment workflow is completed.</p>
+
+      <div id="billingCycleBlock" class="hidden">
+        <label>Billing cycle <span class="req">*</span></label>
+        <select id="billingCycle">
+          <option value="">Select billing cycle</option>
+          <option value="MONTHLY">Monthly</option>
+          <option value="ANNUAL">Annual</option>
+        </select>
+      </div>
       <label>Business type <span class="req">*</span></label>
       <select id="businessTypeCode">
         <option value="">Select your operating model</option>
@@ -120,7 +144,7 @@
       </select>
       <p class="hint">This is locked after workspace creation because it controls pricing, entitlements, modules, onboarding milestones, and workspace visibility.</p>
 
-      <button class="btn" id="btnInitiate" onclick="doInitiate()">Send verification code</button>
+      <button class="btn" id="btnInitiate" onclick="doInitiate()">Continue and send verification code</button>
       <div class="msg" id="msg1"></div>
       <p class="foot">Already have an account? <a href="#" onclick="goApp('/signin');return false;">Sign in</a></p>
     </section>
@@ -234,6 +258,16 @@
     return unwrap(json);
   }
 
+  window.syncCommercialIntent = function () {
+    var intent = $("commercialIntent").value;
+    var billingBlock = $("billingCycleBlock");
+    if (intent === "PAID") {
+      billingBlock.classList.remove("hidden");
+    } else {
+      billingBlock.classList.add("hidden");
+      $("billingCycle").value = "";
+    }
+  };
   window.doInitiate = async function () {
     msg("msg1", "", "");
     var legalName = $("legalName").value.trim();
@@ -242,6 +276,13 @@
     if (legalName.length < 2) return msg("msg1", "Enter your company legal name.", "err");
     if (displayName.length < 2) return msg("msg1", "Enter a workspace display name.", "err");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return msg("msg1", "Enter a valid work email.", "err");
+    var commercialIntent = $("commercialIntent").value;
+    if (["TRIAL", "PAID"].indexOf(commercialIntent) < 0) return msg("msg1", "Select Start Free Trial or Subscribe Now.", "err");
+    var planCode = $("planCode").value;
+    if (["STARTER_MONTHLY_E2E", "GROWTH_MONTHLY_E2E", "SCALE_MONTHLY_E2E", "ENTERPRISE_CUSTOM_E2E"].indexOf(planCode) < 0) return msg("msg1", "Select a valid plan.", "err");
+    var billingCycle = $("billingCycle").value;
+    if (commercialIntent === "PAID" && ["MONTHLY", "ANNUAL"].indexOf(billingCycle) < 0) return msg("msg1", "Select a billing cycle for Subscribe Now.", "err");
+    if (commercialIntent === "TRIAL" && billingCycle) return msg("msg1", "Billing cycle is only required for Subscribe Now.", "err");
     var businessTypeCode = $("businessTypeCode").value;
     if (["COURIER", "COLOADER", "COLOADER_AND_COURIER"].indexOf(businessTypeCode) < 0) return msg("msg1", "Select your business type.", "err");
 
@@ -251,8 +292,11 @@
       displayName: displayName,
       msmeBand: $("msmeBand").value,
       businessTypeCode: businessTypeCode,
+      commercialIntent: commercialIntent,
+      planCode: planCode,
       flowType: "INTEGRATED_E2E"
     };
+    if (commercialIntent === "PAID") payload.billingCycle = billingCycle;
     var brand = $("brandName").value.trim();
     if (brand) { payload.brandName = brand; payload.useBrandNameForDisplay = false; }
     var phone = $("phone").value.replace(/\D/g, "");
