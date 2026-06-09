@@ -125,8 +125,8 @@ foreach ($Rel in $CurrentUiFilesSorted) {
     $Violations.Add('MISSING_PRIMARY_TOKEN|' + $Rel + '|--teal:#01696F')
   }
 
-  if ($Content.IndexOf('--teal-dark:#0C4E54', [System.StringComparison]::OrdinalIgnoreCase) -lt 0) {
-    $Violations.Add('MISSING_DEEP_TEAL_TOKEN|' + $Rel + '|--teal-dark:#0C4E54')
+  if ($Content.IndexOf('--teal-dark:#064E53', [System.StringComparison]::OrdinalIgnoreCase) -lt 0) {
+    $Violations.Add('MISSING_DEEP_TEAL_TOKEN|' + $Rel + '|--teal-dark:#064E53')
   }
 
   $CurrentHexes = @(Get-ValidCssHexes -Content $Content)
