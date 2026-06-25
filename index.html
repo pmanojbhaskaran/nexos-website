@@ -99,6 +99,16 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .product-line-link{font-size:14px;font-weight:600;color:var(--teal);display:inline-flex;align-items:center;gap:6px;margin-top:8px}
 .product-line-card.shipper .product-line-link{color:var(--coloader)}
 @media(max-width:768px){.product-lines-grid{grid-template-columns:1fr}}
+.solutions-group{margin-top:40px}
+.solutions-group:first-of-type{margin-top:0}
+.solutions-group-head{margin-bottom:20px}
+.solutions-group-title{font-size:20px;font-weight:700;margin-bottom:8px;line-height:1.3}
+.solutions-group-sub{font-size:15px;color:var(--ink-muted);line-height:1.65;max-width:720px}
+.product-line-position{font-size:14px;color:var(--ink-soft);font-weight:600;margin-bottom:10px;line-height:1.55}
+#pricing-preview .pricing-grid.pricing-grid-three{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+@media(max-width:1024px){#pricing-preview .pricing-grid.pricing-grid-three{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:640px){#pricing-preview .pricing-grid.pricing-grid-three{grid-template-columns:1fr!important}}
+.notify-consent label a{color:var(--teal);font-weight:600;text-decoration:underline}
 .nav-links{display:flex;align-items:center;justify-content:center;gap:28px;list-style:none;grid-column:2;justify-self:center;min-width:0}
 .nav-actions{display:flex;align-items:center;gap:12px;grid-column:3;justify-self:end;flex-shrink:0}
 .nav-mobile-wrap{display:none;align-items:center;gap:10px;grid-column:3;justify-self:end}
@@ -189,6 +199,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .sol-link{font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
 .sol-link:hover{gap:10px}
 .sol-card.courier .sol-link{color:var(--courier)}.sol-card.coloader .sol-link{color:var(--coloader)}.sol-card.hybrid .sol-link{color:var(--hybrid)}
+.sol-card.shipper{border-color:var(--coloader-border)}.sol-card.shipper::before{background:var(--coloader)}
+.sol-card.shipper .sol-tag{color:var(--coloader)}.sol-card.shipper .sol-feat .ico{color:var(--coloader)}.sol-card.shipper .sol-link{color:var(--coloader)}
 
 /* Why NEXOS */
 .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:48px}
@@ -643,17 +655,15 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <nav class="nav-wrap">
   <a href="/" class="logo"><img src="/public/brand/nexos-wordmark.png" alt="NEXOS" class="logo-wordmark" height="28" width="167"></a>
   <ul class="nav-links">
-    <li><a href="#product-lines">Product</a></li>
-    <li><a href="#courier-os">Courier &amp; Co-loader OS</a></li>
-    <li><a href="#shipper-control">Shipper Control</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="/support.html">Support &amp; Contact</a></li>
-    <li><a href="/support.html#contact">Contact</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#solutions">Solutions</a></li>
+    <li><a href="#pricing-preview">Pricing</a></li>
+    <li><a href="/support.html">Support</a></li>
   </ul>
   <div class="nav-actions">
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><svg class="ico ti-moon"><use href="#i-moon"/></svg><svg class="ico ti-sun"><use href="#i-sun"/></svg></button>
-    <a href="javascript:void(0)" class="btn-s" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
-    <a href="#product-lines" class="btn-p">Explore NEXOS</a>
+    <a href="javascript:void(0)" class="btn-p" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
   </div>
   <div class="nav-mobile-wrap">
     <button class="theme-toggle mob-show" onclick="toggleTheme()" aria-label="Toggle theme" style="display:none" id="mobTheme"><svg class="ico ti-moon"><use href="#i-moon"/></svg><svg class="ico ti-sun"><use href="#i-sun"/></svg></button>
@@ -664,12 +674,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </header>
 
 <div class="mobile-nav" id="mobNav">
-  <a href="#product-lines" onclick="closeMob()">Product</a>
-  <a href="#courier-os" onclick="closeMob()">Courier &amp; Co-loader OS</a>
-  <a href="#shipper-control" onclick="closeMob()">Shipper Control</a>
   <a href="#about" onclick="closeMob()">About</a>
-  <a href="/support.html" onclick="closeMob()">Support &amp; Contact</a>
-  <a href="/support.html#contact" onclick="closeMob()">Contact</a>
+  <a href="#products" onclick="closeMob()">Products</a>
+  <a href="#solutions" onclick="closeMob()">Solutions</a>
+  <a href="#pricing-preview" onclick="closeMob()">Pricing</a>
+  <a href="/support.html" onclick="closeMob()">Support</a>
   <a href="javascript:void(0)" onclick="closeMob();openNotify('Request Founder Demo')">Request Founder Demo</a>
 </div>
 
@@ -683,7 +692,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   <p class="hero-cta-note">Share your operating model. We will review fitment and schedule a founder-led walkthrough where appropriate.</p>
   <div class="hero-ctas">
     <a href="javascript:void(0)" class="btn-p" onclick="openNotify('Request Founder Demo')">Request Founder Demo <svg class="ico" style="width:15px;height:15px"><use href="#i-arrow"/></svg></a>
-    <a href="#product-lines" class="btn-s">Explore NEXOS</a>
   </div>
   <div class="hero-proof">
     <div class="proof-item"><svg class="ico proof-icon"><use href="#i-zap"/></svg><div class="proof-text"><strong>Courier &amp; Co-loader OS</strong><span>Starting product for operators — shipments through audit trails</span></div></div>
@@ -694,28 +702,30 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </div>
 </section>
 
-<!-- PRODUCT LINES -->
-<section class="product-lines" id="product-lines">
+<!-- PRODUCTS -->
+<section class="product-lines" id="products">
 <div class="container">
   <div class="fade-up" style="margin-bottom:28px">
-    <p class="slabel">Product Lines</p>
+    <p class="slabel">Products</p>
     <h2 class="stitle">One ecosystem OS. Two product directions.</h2>
     <p class="ssub">NEXOS is the logistics operating system for India’s ecosystem — starting with Courier &amp; Co-loader OS for operators, and expanding into NEXOS Shipper Control for businesses that ship through multiple logistics partners.</p>
   </div>
   <div class="product-lines-grid fade-up">
     <article class="product-line-card" id="courier-os">
-      <p class="product-line-audience">For logistics operators</p>
+      <p class="product-line-audience">For courier companies, express logistics operators, co-loaders, branch teams, hub teams, billing teams, and owners</p>
       <h3>Courier &amp; Co-loader OS</h3>
-      <p>Control daily courier and co-loader operations from shipment creation to pickup, bagging, manifest, tracking, POD, COD, billing, NDR/RTO, and audit trails.</p>
+      <p class="product-line-position">Starting NEXOS product line for logistics operators.</p>
+      <p>Control daily courier and co-loader operations from shipment creation through pickup, bagging, manifest, tracking, POD, COD, billing, NDR/RTO, and audit trails.</p>
       <p class="product-line-modules">Shipments · Pickup · Bagging · Manifest · Co-loader operations · Tracking · POD · COD · Billing · Exceptions · NDR/RTO · Partner performance · Dashboards · Audit trails · Operational accountability</p>
       <a href="javascript:void(0)" class="product-line-link" onclick="openNotify('Request Founder Demo')">Request founder demo &#8594;</a>
     </article>
     <article class="product-line-card shipper" id="shipper-control">
-      <p class="product-line-audience">For businesses that ship</p>
+      <p class="product-line-audience">For businesses that ship through multiple courier/logistics partners</p>
       <h3>NEXOS Shipper Control</h3>
-      <p>Bring visibility and control across multiple courier/logistics partners, including tracking, exceptions, POD follow-up, COD visibility, billing disputes, partner performance, and shipment accountability.</p>
-      <p class="product-line-modules">Multi-partner shipment control · Booking visibility · Tracking across partners · Delivery exceptions · NDR/RTO visibility · POD follow-up · COD reconciliation visibility · Partner performance · Billing and dispute visibility · Dashboards · Accountability across shipping operations</p>
-      <a href="javascript:void(0)" class="product-line-link" onclick="openNotify('Request Founder Demo')">Discuss Shipper Control &#8594;</a>
+      <p class="product-line-position">Expansion product line for shippers that need control across logistics partners.</p>
+      <p>Bring visibility and control across multiple courier/logistics partners — not generic tracking, but operating control across partner networks.</p>
+      <p class="product-line-modules">Multi-partner shipment visibility · Booking visibility · Tracking across partners · Delivery exceptions · NDR/RTO visibility · POD follow-up · COD reconciliation visibility · Partner performance · Billing/dispute visibility · Dashboards · Accountability across shipping operations</p>
+      <a href="javascript:void(0)" class="product-line-link" onclick="openNotify('Discuss Shipper Control')">Discuss Shipper Control &#8594;</a>
     </article>
   </div>
 </div>
@@ -727,7 +737,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   <p class="slabel">About NEXOS</p>
   <h2 class="stitle">A logistics operating system for India’s ecosystem</h2>
   <p class="ssub" style="max-width:720px">NEXOS is a SaaS operating system built by Adyaya Solutions Private Limited for India’s logistics ecosystem. We start with Courier &amp; Co-loader OS — the operating and control layer for courier companies, express logistics operators, co-loaders, branch teams, hub teams, billing teams, and owners. We are expanding into NEXOS Shipper Control for businesses that ship through multiple courier and logistics partners and need visibility, accountability, and control across those relationships.</p>
-  <p class="ssub" style="max-width:720px;margin-top:16px">Contact: <a href="mailto:manoj@nexos.co.in" style="color:var(--teal);font-weight:600">manoj@nexos.co.in</a> · <a href="/support.html" style="color:var(--teal);font-weight:600">Support &amp; Contact</a></p>
+  <p class="ssub" style="max-width:720px;margin-top:16px">Contact: <a href="mailto:manoj@nexos.co.in" style="color:var(--teal);font-weight:600">manoj@nexos.co.in</a> · <a href="/support.html" style="color:var(--teal);font-weight:600">Support</a></p>
 </div>
 </section>
 
@@ -774,14 +784,34 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <div class="container">
   <div class="fade-up">
     <p class="slabel">Solutions</p>
-    <h2 class="stitle">Courier &amp; Co-loader OS — built for how Indian logistics works</h2>
-    <p class="ssub">The starting NEXOS product line for logistics operators. Courier workflows, co-loader workflows, and PTL linehaul dependency are configured separately so pricing, responsibility, billing, and margin do not get mixed.</p>
+    <h2 class="stitle">Operating configurations for operators and shippers</h2>
+    <p class="ssub">NEXOS solutions are configured under two product directions — Courier &amp; Co-loader OS for logistics operators, and NEXOS Shipper Control for businesses managing shipments across multiple courier/logistics partners.</p>
   </div>
-  <div class="solutions-grid fade-up">
-    <div class="sol-card courier"><p class="sol-tag">NEXOS Courier OS</p><h3>Courier / Express Operators</h3><p>For operators booking shipments from customers and delivering through own branches, agents, franchisees, or partner capacity.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Booking, AWB, pickup, hub scan, bagging</li><li><svg class="ico"><use href="#i-check"/></svg>Manifest, linehaul dispatch, delivery ePOD</li><li><svg class="ico"><use href="#i-check"/></svg>NDR, RTO, billing, COD, margin tracking</li><li><svg class="ico"><use href="#i-check"/></svg>Own FTL, rented FTL, or PTL via co-loader</li><li><svg class="ico"><use href="#i-check"/></svg>Branch and multi-hub operations</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Guided Plan Recommendation')">Check fit &amp; price &#8594;</a></div>
-    <div class="sol-card coloader"><p class="sol-tag">NEXOS Co-loader OS</p><h3>Co-loader / Linehaul Operators</h3><p>For operators selling shared linehaul, consolidation, airport handling, and handover/retrieval services to courier companies.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Party-to-Party and Party-to-Co-loader</li><li><svg class="ico"><use href="#i-check"/></svg>Co-loader-to-Co-loader and Co-loader-to-Party</li><li><svg class="ico"><use href="#i-check"/></svg>Airport lodgement and retrieval control</li><li><svg class="ico"><use href="#i-check"/></svg>Handover proof and responsibility engine</li><li><svg class="ico"><use href="#i-check"/></svg>Payable, receivable, and margin visibility</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Guided Plan Recommendation')">Check fit &amp; price &#8594;</a></div>
-    <div class="sol-card courier"><p class="sol-tag">Courier Linehaul Config</p><h3>Courier Using Co-loader PTL</h3><p>For courier operators that book customers directly but buy PTL/shared linehaul capacity from co-loaders or other partners.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Courier booking remains under courier tenant</li><li><svg class="ico"><use href="#i-check"/></svg>PTL co-loader linehaul configured separately</li><li><svg class="ico"><use href="#i-check"/></svg>Partner handover and responsibility tracking</li><li><svg class="ico"><use href="#i-check"/></svg>Customer billing and co-loader payable split</li><li><svg class="ico"><use href="#i-check"/></svg>Margins visible by lane, shipment, and partner</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Guided Plan Recommendation')">Check fit &amp; price &#8594;</a></div>
-    <div class="sol-card hybrid"><p class="sol-tag">Co-loader Add-on</p><h3>Co-loader With Courier Ops</h3><p>For co-loaders who also operate direct courier booking and delivery as a separate business capability inside their own tenant.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Co-loader remains the primary tenant type</li><li><svg class="ico"><use href="#i-check"/></svg>Courier operations enabled as an add-on</li><li><svg class="ico"><use href="#i-check"/></svg>Separate workflows and controls by business line</li><li><svg class="ico"><use href="#i-check"/></svg>Unified users, attendance, and financial visibility</li><li><svg class="ico"><use href="#i-check"/></svg>Implementation-led setup, not blind self-serve</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Request Founder Demo')">Request Founder Demo &#8594;</a></div>
+
+  <div class="solutions-group fade-up">
+    <div class="solutions-group-head">
+      <h3 class="solutions-group-title">Courier &amp; Co-loader Operators</h3>
+      <p class="solutions-group-sub">Starting product configurations for courier companies, co-loaders, and hybrid operator models within Courier &amp; Co-loader OS.</p>
+    </div>
+    <div class="solutions-grid">
+      <div class="sol-card courier"><p class="sol-tag">Courier &amp; Co-loader OS</p><h3>Courier Operator Configuration</h3><p>For operators booking shipments from customers and delivering through own branches, agents, franchisees, or partner capacity.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Booking, AWB, pickup, hub scan, bagging</li><li><svg class="ico"><use href="#i-check"/></svg>Manifest, linehaul dispatch, delivery ePOD</li><li><svg class="ico"><use href="#i-check"/></svg>NDR, RTO, billing, COD, margin tracking</li><li><svg class="ico"><use href="#i-check"/></svg>Branch and multi-hub operations</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Guided Plan Recommendation')">Check fit &amp; price &#8594;</a></div>
+      <div class="sol-card coloader"><p class="sol-tag">Courier &amp; Co-loader OS</p><h3>Co-loader Operator Configuration</h3><p>For operators selling shared linehaul, consolidation, airport handling, and handover/retrieval services to courier companies.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Party-to-Party and Party-to-Co-loader flows</li><li><svg class="ico"><use href="#i-check"/></svg>Co-loader-to-Co-loader and Co-loader-to-Party</li><li><svg class="ico"><use href="#i-check"/></svg>Airport lodgement and retrieval control</li><li><svg class="ico"><use href="#i-check"/></svg>Payable, receivable, and margin visibility</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Guided Plan Recommendation')">Check fit &amp; price &#8594;</a></div>
+      <div class="sol-card courier"><p class="sol-tag">Courier &amp; Co-loader OS</p><h3>Courier + PTL Linehaul Configuration</h3><p>For courier operators that book customers directly but buy PTL/shared linehaul capacity from co-loaders or other partners.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Courier booking remains under courier tenant</li><li><svg class="ico"><use href="#i-check"/></svg>PTL co-loader linehaul configured separately</li><li><svg class="ico"><use href="#i-check"/></svg>Partner handover and responsibility tracking</li><li><svg class="ico"><use href="#i-check"/></svg>Customer billing and co-loader payable split</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Guided Plan Recommendation')">Check fit &amp; price &#8594;</a></div>
+      <div class="sol-card hybrid"><p class="sol-tag">Courier &amp; Co-loader OS</p><h3>Co-loader + Courier Operations Add-on</h3><p>For co-loaders who also operate direct courier booking and delivery as a separate business capability inside their own tenant.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Co-loader remains the primary tenant type</li><li><svg class="ico"><use href="#i-check"/></svg>Courier operations enabled as an add-on</li><li><svg class="ico"><use href="#i-check"/></svg>Separate workflows and controls by business line</li><li><svg class="ico"><use href="#i-check"/></svg>Implementation-led setup, not blind self-serve</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Request Founder Demo')">Request Founder Demo &#8594;</a></div>
+    </div>
+  </div>
+
+  <div class="solutions-group fade-up">
+    <div class="solutions-group-head">
+      <h3 class="solutions-group-title">Shippers</h3>
+      <p class="solutions-group-sub">Expansion configurations under NEXOS Shipper Control for businesses that ship through multiple courier/logistics partners and need control, not just tracking links.</p>
+    </div>
+    <div class="solutions-grid">
+      <div class="sol-card shipper"><p class="sol-tag">NEXOS Shipper Control</p><h3>Multi-Partner Shipping Control</h3><p>For businesses running shipments across multiple courier and logistics partners from one operating view.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Unified shipment register across partners</li><li><svg class="ico"><use href="#i-check"/></svg>Partner-wise booking and handoff visibility</li><li><svg class="ico"><use href="#i-check"/></svg>Control tower view across shipping operations</li><li><svg class="ico"><use href="#i-check"/></svg>Accountability by partner, lane, and shipment</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Discuss Shipper Control')">Discuss Shipper Control &#8594;</a></div>
+      <div class="sol-card shipper"><p class="sol-tag">NEXOS Shipper Control</p><h3>Tracking &amp; Delivery Exception Visibility</h3><p>For teams that need live movement and exception control across partner networks, not disconnected partner portals.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Tracking across multiple logistics partners</li><li><svg class="ico"><use href="#i-check"/></svg>Delivery exception visibility and follow-up</li><li><svg class="ico"><use href="#i-check"/></svg>NDR/RTO visibility across partners</li><li><svg class="ico"><use href="#i-check"/></svg>Escalation paths with operational context</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Discuss Shipper Control')">Discuss Shipper Control &#8594;</a></div>
+      <div class="sol-card shipper"><p class="sol-tag">NEXOS Shipper Control</p><h3>POD, COD, Billing &amp; Dispute Visibility</h3><p>For finance and operations teams reconciling POD, COD, invoices, and disputes across multiple shipping partners.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>POD follow-up across partner networks</li><li><svg class="ico"><use href="#i-check"/></svg>COD reconciliation visibility</li><li><svg class="ico"><use href="#i-check"/></svg>Billing and dispute visibility by partner</li><li><svg class="ico"><use href="#i-check"/></svg>Shipment-level financial accountability</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Discuss Shipper Control')">Discuss Shipper Control &#8594;</a></div>
+      <div class="sol-card shipper"><p class="sol-tag">NEXOS Shipper Control</p><h3>Partner Performance &amp; Accountability</h3><p>For businesses that need partner scorecards, SLA risk, and shipment accountability across their logistics network.</p><ul class="sol-feat"><li><svg class="ico"><use href="#i-check"/></svg>Partner performance by lane, SLA, and volume</li><li><svg class="ico"><use href="#i-check"/></svg>Dashboards for shipping operations teams</li><li><svg class="ico"><use href="#i-check"/></svg>Audit trails across partner interactions</li><li><svg class="ico"><use href="#i-check"/></svg>Accountability across multi-partner shipping</li></ul><a href="javascript:void(0)" class="sol-link" onclick="openNotify('Discuss Shipper Control')">Discuss Shipper Control &#8594;</a></div>
+    </div>
   </div>
 </div>
 </section>
@@ -791,7 +821,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <div class="container">
   <div class="fade-up">
     <p class="slabel">Why NEXOS</p>
-    <h2 class="stitle">Built by operators. Not by coders.</h2>
+    <h2 class="stitle">Built from operator workflows. Not generic software assumptions.</h2>
     <p class="ssub">NEXOS is shaped by structured workflow design for courier and co-loader operations — not inflated traction claims on a marketing site. Every workflow reflects real booking, pickup, hub, delivery, billing, and margin-control problems.</p>
   </div>
   <div class="why-grid fade-up">
@@ -898,66 +928,49 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   <div class="container">
     <div class="section-head fade-up">
       <p class="slabel">Pricing</p>
-      <h2 class="stitle">Guided fitment quote</h2>
-      <p class="ssub">NEXOS pricing depends on business type, shipment volume, branch count, user roles, COD and billing complexity, co-loader usage, and required modules. Public package pricing is under finalisation. Early adopters can request a founder-led fitment review.</p>
+      <h2 class="stitle">Guided fitment pricing</h2>
+      <p class="ssub">NEXOS pricing depends on business type, shipment volume, operating model, branches, users, COD/billing complexity, partner usage, and required modules. Public package pricing is under finalisation. Early users can request a founder-led fitment review.</p>
     </div>
-    <p class="pricing-intro fade-up">Starting packages under finalisation · Final commercial proposal after fitment review</p>
 
-    <div class="pricing-grid fade-up">
+    <div class="pricing-grid pricing-grid-three fade-up">
       <div class="price-card">
-        <p class="price-name">NEXOS Courier OS</p>
-        <h3>Courier Operators</h3>
-        <p class="price-icp">For courier and express operators running booking, pickup, hub, delivery, POD, billing, and COD.</p>
-        <p class="price-value">Guided fitment quote</p>
+        <p class="price-name">Courier &amp; Co-loader OS</p>
+        <h3>Logistics operators</h3>
+        <p class="price-icp">For logistics operators running courier, co-loader, branch, hub, pickup, delivery, billing, COD, POD, and exception workflows.</p>
+        <p class="price-value">Guided fitment review</p>
         <div class="price-divider" aria-hidden="true"></div>
-        <p class="price-note">Scope covers users, branches, shipment bands, COD, and modules. Final commercial proposal after fitment review.</p>
+        <p class="price-note">Scope covers users, branches, shipment bands, COD, modules, and operating model complexity.</p>
         <div class="price-actions">
           <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Request fitment review')">Request fitment review</a>
-          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
         </div>
       </div>
 
       <div class="price-card">
-        <p class="price-name">NEXOS Co-loader OS</p>
-        <h3>Co-loader Operators</h3>
-        <p class="price-icp">For co-loaders managing shared linehaul, bagging, manifest, airport handover/retrieval, and settlement.</p>
-        <p class="price-value">Starting packages under finalisation</p>
-        <div class="price-divider" aria-hidden="true"></div>
-        <p class="price-note">Lanes, users, settlement controls, and co-loader responsibility complexity reviewed during fitment.</p>
-        <div class="price-actions">
-          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Request fitment review')">Request fitment review</a>
-          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
-        </div>
-      </div>
-
-      <div class="price-card">
-        <p class="price-name">Courier + PTL Config</p>
-        <h3>Courier Using Co-loaders</h3>
-        <p class="price-icp">For courier operators using PTL/shared linehaul capacity from co-loaders or partner networks.</p>
-        <p class="price-value">Final commercial proposal after fitment review</p>
-        <div class="price-divider" aria-hidden="true"></div>
-        <p class="price-note">Partner linehaul complexity, payable controls, and handover rules shape the commercial scope.</p>
-        <div class="price-actions">
-          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Request fitment review')">Request fitment review</a>
-          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a>
-        </div>
-      </div>
-
-      <div class="price-card">
-        <p class="price-name">Co-loader + Courier Add-on</p>
-        <h3>Co-loader With Courier Ops</h3>
-        <p class="price-icp">For co-loaders that also run direct courier operations as an additional operating capability.</p>
+        <p class="price-name">NEXOS Shipper Control</p>
+        <h3>Multi-partner shippers</h3>
+        <p class="price-icp">For businesses shipping through multiple courier/logistics partners and needing visibility across booking, tracking, delivery exceptions, POD, COD, partner performance, and billing disputes.</p>
         <p class="price-value">Founder-led fitment review</p>
         <div class="price-divider" aria-hidden="true"></div>
-        <p class="price-note">Business-line separation, permissions, and implementation scope confirmed before any commercial offer.</p>
+        <p class="price-note">Partner count, shipment volume, reconciliation complexity, and module scope reviewed during fitment.</p>
         <div class="price-actions">
-          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Request fitment review')">Request fitment review</a>
-          <a class="btn-s" href="javascript:void(0)" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a>
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Discuss Shipper Control')">Discuss Shipper Control</a>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <p class="price-name">Pilot / Early Access</p>
+        <h3>Guided walkthrough</h3>
+        <p class="price-icp">For selected operators and shippers who want a founder-led walkthrough before production rollout.</p>
+        <p class="price-value">By fitment review</p>
+        <div class="price-divider" aria-hidden="true"></div>
+        <p class="price-note">Pilot participation is subject to fitment review and mutual readiness confirmation.</p>
+        <div class="price-actions">
+          <a class="btn-p" href="javascript:void(0)" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
         </div>
       </div>
     </div>
 
-    <p class="pricing-footnote">We do not publish public pricing numbers on this website. Pilot participation and demo interest do not guarantee commercial access or production rollout.</p>
+    <p class="pricing-footnote">Public pricing is not published yet. Pilot interest does not guarantee production access or commercial rollout.</p>
   </div>
 </section>
 
@@ -982,12 +995,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     <div class="footer-col"><h4>Product</h4><ul>
       <li><a href="#courier-os">Courier &amp; Co-loader OS</a></li>
       <li><a href="#shipper-control">NEXOS Shipper Control</a></li>
-      <li><a href="#chain">How It Works</a></li>
+      <li><a href="#solutions">Solutions</a></li>
       <li><a href="#pricing-preview">Pricing</a></li>
     </ul></div>
     <div class="footer-col"><h4>Company</h4><ul>
       <li><a href="#about">About</a></li>
-      <li><a href="/support.html">Support &amp; Contact</a></li>
+      <li><a href="/support.html">Support</a></li>
       <li><a href="javascript:void(0)" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a></li>
       <li><a href="javascript:void(0)" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a></li>
     </ul></div>
@@ -995,7 +1008,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
       <li><a href="/privacy-policy.html">Privacy Policy</a></li>
       <li><a href="/general-terms.html">General Terms</a></li>
       <li><a href="/terms-of-service.html">Terms of Service</a></li>
-      <li><a href="/support.html">Support &amp; Contact</a></li>
     </ul></div>
   </div>
   <div class="footer-bottom"><span>&#169; 2026 Adyaya Solutions Private Limited. All rights reserved.</span><div class="footer-legal"><span>NEXOS&#8482;</span><span>nexos.co.in</span></div></div>
@@ -1030,7 +1042,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
       <div><label>Monthly Shipment Volume</label><select id="nf-volume"><option value="">Select...</option><option>Under 1,000</option><option>1,000 - 5,000</option><option>5,000 - 20,000</option><option>20,000 - 100,000</option><option>100,000+</option></select></div>
       <div><label>Current System</label><select id="nf-system"><option value="">Select...</option><option>Excel / WhatsApp</option><option>Tally + Manual</option><option>Local Courier Software</option><option>Custom Software</option><option>Other</option></select></div>
     </div>
-    <div style="display:flex;align-items:flex-start;gap:8px;margin-top:2px"><input type="checkbox" id="nf-consent" style="margin-top:3px;width:auto"><label for="nf-consent" style="font-size:11px;color:var(--ink-muted);font-weight:400">I consent to be contacted by Adyaya Solutions regarding NEXOS. My data will not be shared with third parties.</label></div>
+    <div style="display:flex;align-items:flex-start;gap:8px;margin-top:2px" class="notify-consent"><input type="checkbox" id="nf-consent" style="margin-top:3px;width:auto"><label for="nf-consent" style="font-size:11px;color:var(--ink-muted);font-weight:400">I agree that Adyaya Solutions Private Limited may contact me regarding NEXOS. My information will be handled as described in the <a href="/privacy-policy.html">Privacy Policy</a>.</label></div>
     <div class="notify-actions">
       <button class="btn-p" id="notifySubmitBtn" type="button" onclick="submitNotify()">Join Pilot Waitlist</button>
       <button class="btn-s" type="button" onclick="hideNotify()">Cancel</button>
@@ -1038,9 +1050,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
     <p id="notifyErr" style="display:none;color:var(--error);font-size:12px;margin-top:6px;text-align:center"></p>
   </div></div>
   <div id="notifySuccess" style="display:none">
-    <div class="notify-msg">Thank you. We have recorded your interest and will reach out personally before launch.</div>
-    <p id="successRouting" style="text-align:center;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--ink-muted);margin-top:10px"></p>
-    <p style="text-align:center;font-size:12px;color:var(--ink-muted);margin-top:6px">If your email client opened, please hit send to complete the submission.</p>
+    <div class="notify-msg">Your email draft is ready. Please send it to complete the request.</div>
+    <p id="successRouting" style="text-align:center;font-size:12px;color:var(--ink-muted);margin-top:10px"></p>
+    <p style="text-align:center;font-size:12px;color:var(--ink-muted);margin-top:6px">If your email client opened, please click Send to complete the submission.</p>
     <button class="btn-p" onclick="hideNotify()" style="width:100%;justify-content:center;margin-top:14px">Close</button>
   </div>
 </div></div>
@@ -1068,6 +1080,7 @@ var NOTIFY_CONFIG={
   'Guided Plan Recommendation':{badge:'Fit & Price',title:'Guided Plan Recommendation',subtitle:'Tell us about your operation. We will recommend the right NEXOS scope and conduct a founder-led fitment review.',emailTo:['manoj@nexos.co.in'],subject:'NEXOS Fit and Price Request',btnLabel:'Submit Fit & Price Request'},
   'Pricing Updates':{badge:'Pricing',title:'Get Pricing Updates',subtitle:'Be the first to know when NEXOS public package pricing is finalised.',emailTo:['manoj@nexos.co.in'],subject:'NEXOS Pricing Interest',btnLabel:'Get Pricing Updates'},
   'Request Founder Demo':{badge:'Request Founder Demo',title:'Request Founder Demo',subtitle:'Tell us about your courier or co-loader operation. We will review fitment and schedule a founder-led walkthrough.',emailTo:['manoj@nexos.co.in'],subject:'NEXOS Founder Demo Request',btnLabel:'Submit Demo Request'},
+  'Discuss Shipper Control':{badge:'Shipper Control',title:'Discuss Shipper Control',subtitle:'Tell us about your multi-partner shipping operation. We will review fitment for NEXOS Shipper Control.',emailTo:['manoj@nexos.co.in'],subject:'NEXOS Shipper Control Enquiry',btnLabel:'Discuss Shipper Control'},
   'Join Pilot Waitlist':{badge:'Join Pilot Waitlist',title:'Join Pilot Waitlist',subtitle:'Share your operating model and pilot interest. We will review fitment before inviting pilot users.',emailTo:['manoj@nexos.co.in'],subject:'NEXOS Pilot Waitlist Request',btnLabel:'Join Pilot Waitlist'},
   'Contact Us':{badge:'Contact Us',title:'Get in Touch',subtitle:'Have a question about NEXOS? Drop us a note.',emailTo:['manoj@nexos.co.in'],subject:'NEXOS Contact Enquiry',btnLabel:'Send Enquiry'},
   'Sales Enquiry':{badge:'Sales',title:'Talk to Sales',subtitle:'Share your requirement. Our team will respond after fitment review.',emailTo:['manoj@nexos.co.in'],subject:'NEXOS Sales Enquiry',btnLabel:'Send Sales Enquiry'}
@@ -1102,13 +1115,10 @@ function submitNotify(){
   if(!con){err.textContent='Please provide consent to be contacted.';err.style.display='block';return}
   err.style.display='none';
   var cfg=NOTIFY_CONFIG[currentCtx]||NOTIFY_CONFIG['Request Founder Demo'],ts=new Date().toISOString();
-  var lead={ctx:currentCtx,name:n,company:c,email:e,mobile:m,city:ci,type:t,linehaul:lh,volume:vol,system:s,ts:ts,source:window.location.href};
-  var leads=JSON.parse(localStorage.getItem('nexos-leads')||'[]');leads.push(lead);localStorage.setItem('nexos-leads',JSON.stringify(leads));
-  console.log('[NEXOS Lead]',lead);
   var mailto=cfg.emailTo.join(','),subj=encodeURIComponent(cfg.subject+' - '+n+' ('+c+')'),
       body=encodeURIComponent('NEXOS '+currentCtx+' Lead\n================================\n\nName: '+n+'\nCompany: '+c+'\nEmail: '+e+'\nMobile: '+m+'\nCity: '+ci+'\nBusiness Type: '+t+'\nLinehaul / Operating Model: '+(lh||'Not specified')+'\nMonthly Shipment Volume: '+(vol||'Not specified')+'\nCurrent System: '+(s||'Not specified')+'\nSubmitted: '+ts+'\nSource: '+window.location.href+'\n\n================================\nSent from nexos.co.in');
   window.open('mailto:'+mailto+'?subject='+subj+'&body='+body,'_blank');
-  document.getElementById('successRouting').textContent='Email routed to: '+cfg.emailTo.join(' + ');
+  document.getElementById('successRouting').innerHTML='Email routed to: <a href="mailto:manoj@nexos.co.in">manoj@nexos.co.in</a>';
   document.getElementById('notifyForm').style.display='none';document.getElementById('notifySuccess').style.display='block';
 }
 
