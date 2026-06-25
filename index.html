@@ -627,6 +627,59 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   .nav-actions{display:none!important}
   .nav-mobile-wrap{display:flex!important}
 }
+
+/* Floating scroll controls */
+.scroll-float{
+  position:fixed;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:90;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  padding:6px;
+  border-radius:12px;
+  background:var(--card);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow-md);
+}
+.scroll-float-btn{
+  width:36px;
+  height:36px;
+  border-radius:8px;
+  border:1px solid var(--border);
+  background:var(--ivory);
+  color:var(--teal);
+  font-size:17px;
+  font-weight:700;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:background .2s,border-color .2s,color .2s,transform .2s,box-shadow .2s;
+}
+.scroll-float-btn:hover,.scroll-float-btn:focus-visible{
+  background:var(--teal-soft);
+  border-color:var(--courier-border);
+  color:var(--teal-dark);
+  box-shadow:var(--shadow-sm);
+  outline:none;
+}
+.scroll-float-btn:active{transform:scale(.96)}
+@media(max-width:768px){
+  .scroll-float{
+    top:auto;
+    bottom:calc(22px + env(safe-area-inset-bottom,0px));
+    transform:none;
+    right:12px;
+    gap:4px;
+    padding:4px;
+    border-radius:10px;
+  }
+  .scroll-float-btn{width:32px;height:32px;font-size:15px;border-radius:7px}
+}
 </style>
 </head>
 <body>
@@ -685,7 +738,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 <!-- HERO -->
 <section class="hero">
 <div class="container hero-inner">
-  <div class="hero-badge-wrap"><div class="hero-badge"><span class="hero-badge-dot"></span>SaaS operating system for India’s logistics ecosystem</div></div>
+  <div class="hero-badge-wrap"><div class="hero-badge"><span class="hero-badge-dot"></span>Launching soon · SaaS operating system for India’s logistics ecosystem</div></div>
   <p class="hero-tagline">Courier operators today. Multi-partner shippers next.</p>
   <h1>The logistics operating system for courier operators and modern shippers.</h1>
   <p class="hero-body">NEXOS helps Indian logistics operators control shipments, pickup, bagging, manifests, tracking, POD, COD, billing, exceptions, and accountability — and is expanding into Shipper Control for businesses that ship through multiple logistics partners.</p>
@@ -988,7 +1041,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 </section>
 
 <!-- FOOTER -->
-<footer class="site-footer">
+<footer class="site-footer" id="page-footer">
 <div class="container">
   <div class="footer-grid">
     <div class="footer-brand"><a href="/" class="logo"><img src="/public/brand/nexos-mark.png" alt="" class="logo-mark-img" width="34" height="34"><img src="/public/brand/nexos-wordmark.png" alt="NEXOS" class="logo-wordmark" height="24" width="143"></a><p>NEXOS is a SaaS operating system for India’s logistics ecosystem.<br><span style="opacity:.85">NEXOS is owned and operated by Adyaya Solutions Private Limited.</span></p><p style="margin-top:12px;font-size:13px"><a href="mailto:manoj@nexos.co.in" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--teal)">manoj@nexos.co.in</a></p></div>
@@ -1013,6 +1066,12 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   <div class="footer-bottom"><span>&#169; 2026 Adyaya Solutions Private Limited. All rights reserved.</span><div class="footer-legal"><span>NEXOS&#8482;</span><span>nexos.co.in</span></div></div>
 </div>
 </footer>
+
+<nav class="scroll-float" aria-label="Page scroll controls">
+  <button type="button" class="scroll-float-btn" onclick="scrollPage('top')" aria-label="Scroll to top" title="Scroll to top">&#8593;</button>
+  <button type="button" class="scroll-float-btn" onclick="scrollPage('main')" aria-label="Scroll to main sections" title="Scroll to main sections">&#8597;</button>
+  <button type="button" class="scroll-float-btn" onclick="scrollPage('bottom')" aria-label="Scroll to bottom" title="Scroll to bottom">&#8595;</button>
+</nav>
 
 <!-- COMING SOON MODAL -->
 <div class="modal-overlay" id="csModal" onclick="hideCS()"><div class="modal-box" onclick="event.stopPropagation()">
@@ -1102,6 +1161,12 @@ function openNotify(ctx){
   document.getElementById('notifyModal').classList.add('active');document.body.style.overflow='hidden';
 }
 function hideNotify(){document.getElementById('notifyModal').classList.remove('active');document.body.style.overflow=''}
+function scrollPage(target){
+  var el;
+  if(target==='top'){window.scrollTo({top:0,behavior:'smooth'});return}
+  if(target==='main'){el=document.getElementById('solutions')||document.getElementById('products');if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}return}
+  if(target==='bottom'){el=document.getElementById('page-footer');if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}else{window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'});}}
+}
 function submitNotify(){
   var n=document.getElementById('nf-name').value.trim(),c=document.getElementById('nf-company').value.trim(),
       e=document.getElementById('nf-email').value.trim(),m=document.getElementById('nf-mobile').value.trim(),
