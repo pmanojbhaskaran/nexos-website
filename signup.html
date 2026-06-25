@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Start Free Trial / Subscribe &middot; NEXOS</title>
-<meta name="description" content="Create your NEXOS workspace and tenant admin account.">
+<title>Request NEXOS Pilot Access &middot; NEXOS</title>
+<meta name="description" content="Request NEXOS pilot access for Courier &amp; Co-loader OS. Tell us about your logistics operation and we will review your request for demo, pilot, or onboarding discussion.">
+<link rel="icon" type="image/png" href="/public/brand/nexos-mark.png">
 <link rel="canonical" href="https://www.nexos.co.in/signup.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +28,7 @@
   a{color:var(--teal);text-decoration:none;font-weight:600}
   header{width:100%;max-width:1100px;display:flex;align-items:center;justify-content:space-between;padding:22px 24px}
   .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--ink);letter-spacing:-.3px}
-  .logo-mark{width:30px;height:30px;border-radius:7px;background:var(--teal);color:#fff;
-    font-family:'JetBrains Mono',monospace;display:grid;place-items:center;font-weight:700}
+  .logo-wordmark{height:26px;width:auto;display:block;object-fit:contain}
   .wrap{width:100%;max-width:480px;padding:8px 24px 64px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 28px;
     box-shadow:var(--shadow-lg)}
@@ -65,7 +65,7 @@
 </head>
 <body>
 <header>
-  <a class="logo" href="/"><span class="logo-mark">N</span>NEXOS</a>
+  <a class="logo" href="/"><img src="/public/brand/nexos-wordmark.png" alt="NEXOS" class="logo-wordmark" height="26" width="155"></a>
   <a href="/" style="font-size:14px;color:var(--muted)">&larr; Back to site</a>
 </header>
 
@@ -79,8 +79,8 @@
 
     <!-- STEP 1: ACCOUNT -->
     <section id="step-account">
-      <h1>Start Free Trial / Subscribe</h1>
-      <p class="sub">Choose how you want to start. Trial opens the workspace after OTP. Subscribe records payment-required status until payment integration is completed.</p>
+      <h1>Request NEXOS Pilot Access</h1>
+      <p class="sub">Tell us about your logistics operation or shipping workflow. We will review the request and contact you for demo, pilot, or onboarding discussion.</p>
 
       <label>Company legal name <span class="req">*</span></label>
       <input id="legalName" type="text" placeholder="Acme Logistics Pvt Ltd" autocomplete="organization">
@@ -111,12 +111,12 @@
         </div>
       </div>
 
-      <label>Start path <span class="req">*</span></label>
+      <label>Access type <span class="req">*</span></label>
       <select id="commercialIntent" onchange="syncCommercialIntent()">
-        <option value="TRIAL">Start Free Trial</option>
-        <option value="PAID">Subscribe Now</option>
+        <option value="TRIAL">Pilot access</option>
+        <option value="PAID">Commercial subscription</option>
       </select>
-      <p class="hint">Trial starts without payment. Subscribe locks the plan and billing cycle, then waits for payment activation.</p>
+      <p class="hint">Pilot access is subject to fitment review. Commercial subscription follows agreed proposal and activation steps.</p>
 
       <label>Plan <span class="req">*</span></label>
       <select id="planCode">
@@ -125,7 +125,7 @@
         <option value="STARTER_MONTHLY_E2E">Starter</option>
         <option value="ENTERPRISE_CUSTOM_E2E">Enterprise / Custom</option>
       </select>
-      <p class="hint">Plan selection is captured now. Paid activation remains blocked until the payment workflow is completed.</p>
+      <p class="hint">Plan selection helps us understand scope. Final access follows founder-led fitment review and onboarding confirmation.</p>
 
       <div id="billingCycleBlock" class="hidden">
         <label>Billing cycle <span class="req">*</span></label>
@@ -144,7 +144,7 @@
       </select>
       <p class="hint">This is locked after workspace creation because it controls pricing, entitlements, modules, onboarding milestones, and workspace visibility.</p>
 
-      <button class="btn" id="btnInitiate" onclick="doInitiate()">Continue and send verification code</button>
+      <button class="btn" id="btnInitiate" onclick="doInitiate()">Request Pilot Access</button>
       <div class="msg" id="msg1"></div>
       <p class="foot">Already have an account? <a href="#" onclick="goApp('/signin');return false;">Sign in</a></p>
     </section>
@@ -277,12 +277,12 @@
     if (displayName.length < 2) return msg("msg1", "Enter a workspace display name.", "err");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return msg("msg1", "Enter a valid work email.", "err");
     var commercialIntent = $("commercialIntent").value;
-    if (["TRIAL", "PAID"].indexOf(commercialIntent) < 0) return msg("msg1", "Select Start Free Trial or Subscribe Now.", "err");
+    if (["TRIAL", "PAID"].indexOf(commercialIntent) < 0) return msg("msg1", "Select pilot access or commercial subscription.", "err");
     var planCode = $("planCode").value;
     if (["STARTER_MONTHLY_E2E", "GROWTH_MONTHLY_E2E", "SCALE_MONTHLY_E2E", "ENTERPRISE_CUSTOM_E2E"].indexOf(planCode) < 0) return msg("msg1", "Select a valid plan.", "err");
     var billingCycle = $("billingCycle").value;
-    if (commercialIntent === "PAID" && ["MONTHLY", "ANNUAL"].indexOf(billingCycle) < 0) return msg("msg1", "Select a billing cycle for Subscribe Now.", "err");
-    if (commercialIntent === "TRIAL" && billingCycle) return msg("msg1", "Billing cycle is only required for Subscribe Now.", "err");
+    if (commercialIntent === "PAID" && ["MONTHLY", "ANNUAL"].indexOf(billingCycle) < 0) return msg("msg1", "Select a billing cycle for commercial subscription.", "err");
+    if (commercialIntent === "TRIAL" && billingCycle) return msg("msg1", "Billing cycle is only required for commercial subscription.", "err");
     var businessTypeCode = $("businessTypeCode").value;
     if (["COURIER", "COLOADER", "COLOADER_AND_COURIER"].indexOf(businessTypeCode) < 0) return msg("msg1", "Select your business type.", "err");
 
