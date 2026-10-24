@@ -680,6 +680,24 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   }
   .scroll-float-btn{width:32px;height:32px;font-size:15px;border-radius:7px}
 }
+
+/* Localhost-only signup visibility aid. Do not deploy as production behavior. */
+.localhost-signup-only{display:none!important}
+.localhost-signup-active .localhost-signup-only{display:revert!important}
+.localhost-signup-active a.localhost-signup-only.btn-p,
+.localhost-signup-active a.localhost-signup-only.btn-s{display:inline-flex!important}
+.localhost-signup-active .localhost-signup-hero-banner{display:block!important}
+.localhost-signup-active .production-signup-cta{display:none!important}
+.localhost-signup-hero-banner{
+  margin-bottom:20px;padding:14px 18px;border:1.5px solid var(--courier-border);border-radius:12px;
+  background:linear-gradient(135deg,var(--teal-soft),var(--surface));font-size:14px;line-height:1.55;color:var(--ink-soft)
+}
+.localhost-signup-hero-banner strong{color:var(--teal);font-weight:700}
+.localhost-signup-hero-banner a{color:var(--teal);font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.localhost-signup-active .hero-ctas .localhost-signup-primary{
+  font-size:15px;padding:14px 28px;border-radius:10px;box-shadow:var(--shadow-md)
+}
+.localhost-signup-active .nav-actions .localhost-signup-primary{box-shadow:var(--shadow-sm)}
 </style>
 </head>
 <body>
@@ -716,7 +734,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   </ul>
   <div class="nav-actions">
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme"><svg class="ico ti-moon"><use href="#i-moon"/></svg><svg class="ico ti-sun"><use href="#i-sun"/></svg></button>
-    <a href="javascript:void(0)" class="btn-p" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
+    <a href="/signup.html" class="btn-p localhost-signup-only localhost-signup-primary">Sign up</a>
+    <a href="javascript:void(0)" class="btn-p production-signup-cta" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
   </div>
   <div class="nav-mobile-wrap">
     <button class="theme-toggle mob-show" onclick="toggleTheme()" aria-label="Toggle theme" style="display:none" id="mobTheme"><svg class="ico ti-moon"><use href="#i-moon"/></svg><svg class="ico ti-sun"><use href="#i-sun"/></svg></button>
@@ -732,19 +751,26 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   <a href="#solutions" onclick="closeMob()">Solutions</a>
   <a href="#pricing-preview" onclick="closeMob()">Pricing</a>
   <a href="/support.html" onclick="closeMob()">Support</a>
-  <a href="javascript:void(0)" onclick="closeMob();openNotify('Request Founder Demo')">Request Founder Demo</a>
+  <a href="/signup.html" class="localhost-signup-only" onclick="closeMob()">Sign up</a>
+  <a href="javascript:void(0)" class="production-signup-cta" onclick="closeMob();openNotify('Request Founder Demo')">Request Founder Demo</a>
 </div>
 
 <!-- HERO -->
 <section class="hero">
 <div class="container hero-inner">
+  <div class="localhost-signup-hero-banner localhost-signup-only">
+    <strong>Local dev:</strong> Signup entry is surfaced here for localhost testing only.
+    <a href="/signup.html">Go to signup</a>
+  </div>
   <div class="hero-badge-wrap"><div class="hero-badge"><span class="hero-badge-dot"></span>Launching soon · SaaS operating system for India’s logistics ecosystem</div></div>
   <p class="hero-tagline">Courier operators today. Multi-partner shippers next.</p>
   <h1>The logistics operating system for courier operators and modern shippers.</h1>
   <p class="hero-body">NEXOS helps Indian logistics operators control shipments, pickup, bagging, manifests, tracking, POD, COD, billing, exceptions, and accountability — and is expanding into Shipper Control for businesses that ship through multiple logistics partners.</p>
   <p class="hero-cta-note">Share your operating model. We will review fitment and schedule a founder-led walkthrough where appropriate.</p>
   <div class="hero-ctas">
-    <a href="javascript:void(0)" class="btn-p" onclick="openNotify('Request Founder Demo')">Request Founder Demo <svg class="ico" style="width:15px;height:15px"><use href="#i-arrow"/></svg></a>
+    <a href="/signup.html" class="btn-p localhost-signup-only localhost-signup-primary">Start signup <svg class="ico" style="width:15px;height:15px"><use href="#i-arrow"/></svg></a>
+    <a href="javascript:void(0)" class="btn-s localhost-signup-only" onclick="openNotify('Request Founder Demo')">Request Founder Demo</a>
+    <a href="javascript:void(0)" class="btn-p production-signup-cta" onclick="openNotify('Request Founder Demo')">Request Founder Demo <svg class="ico" style="width:15px;height:15px"><use href="#i-arrow"/></svg></a>
   </div>
   <div class="hero-proof">
     <div class="proof-item"><svg class="ico proof-icon"><use href="#i-zap"/></svg><div class="proof-text"><strong>Courier &amp; Co-loader OS</strong><span>Starting product for operators — shipments through audit trails</span></div></div>
@@ -1034,8 +1060,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   <h2>Ready to explore NEXOS for your operation?</h2>
   <p>Courier &amp; Co-loader OS is the starting product. Shipper Control is the expansion line for multi-partner shippers. Pilot interest is subject to fitment review.</p>
   <div class="final-ctas">
-    <a href="javascript:void(0)" class="btn-p" onclick="openNotify('Request Founder Demo')">Request Founder Demo <svg class="ico" style="width:15px;height:15px"><use href="#i-arrow"/></svg></a>
-    <a href="javascript:void(0)" class="btn-s" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a>
+    <a href="/signup.html" class="btn-p localhost-signup-only localhost-signup-primary">Start signup <svg class="ico" style="width:15px;height:15px"><use href="#i-arrow"/></svg></a>
+    <a href="javascript:void(0)" class="btn-s localhost-signup-only" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a>
+    <a href="javascript:void(0)" class="btn-p production-signup-cta" onclick="openNotify('Request Founder Demo')">Request Founder Demo <svg class="ico" style="width:15px;height:15px"><use href="#i-arrow"/></svg></a>
+    <a href="javascript:void(0)" class="btn-s production-signup-cta" onclick="openNotify('Join Pilot Waitlist')">Join Pilot Waitlist</a>
   </div>
 </div>
 </section>
@@ -1121,6 +1149,18 @@ function getTheme(){return localStorage.getItem('nexos-theme')||(window.matchMed
 function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('nexos-theme',t)}
 function toggleTheme(){applyTheme(getTheme()==='dark'?'light':'dark')}
 applyTheme(getTheme());
+
+// Localhost-only signup visibility aid. Do not deploy as production behavior.
+function isLocalhostSignupDev(){
+  var host=window.location.hostname;
+  var port=window.location.port;
+  return (host==='localhost'||host==='127.0.0.1')&&port==='5173';
+}
+function enableLocalhostSignupFrontPlacement(){
+  if(!isLocalhostSignupDev()){return;}
+  document.documentElement.classList.add('localhost-signup-active');
+}
+enableLocalhostSignupFrontPlacement();
 
 var header=document.getElementById('siteHeader');
 window.addEventListener('scroll',function(){header.classList.toggle('scrolled',window.scrollY>10)});

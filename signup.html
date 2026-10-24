@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Request NEXOS Pilot Access &middot; NEXOS</title>
-<meta name="description" content="Request NEXOS pilot access for Courier &amp; Co-loader OS. Tell us about your logistics operation and we will review your request for demo, pilot, or onboarding discussion.">
+<title>Start NEXOS Access &middot; NEXOS</title>
+<meta name="description" content="Start a NEXOS pilot workspace or request commercial access for Courier &amp; Co-loader OS. Pilot access creates an onboarding-ready 14-day trial. Enterprise / Custom requires review.">
 <link rel="icon" type="image/png" href="/public/brand/nexos-mark.png">
 <link rel="canonical" href="https://www.nexos.co.in/signup.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,8 +79,8 @@
 
     <!-- STEP 1: ACCOUNT -->
     <section id="step-account">
-      <h1>Request NEXOS Pilot Access</h1>
-      <p class="sub">Tell us about your logistics operation or shipping workflow. We will review the request and contact you for demo, pilot, or onboarding discussion.</p>
+      <h1 id="formTitle">Start NEXOS Pilot Access</h1>
+      <p class="sub" id="formSub">Successful email verification creates an onboarding-ready 14-day Scale Trial workspace. Your selected plan is the commercial path after the trial.</p>
 
       <label>Company legal name <span class="req">*</span></label>
       <input id="legalName" type="text" placeholder="Acme Logistics Pvt Ltd" autocomplete="organization">
@@ -112,20 +112,20 @@
       </div>
 
       <label>Access type <span class="req">*</span></label>
-      <select id="commercialIntent" onchange="syncCommercialIntent()">
+      <select id="commercialIntent" onchange="syncCommercialCopy()">
         <option value="TRIAL">Pilot access</option>
         <option value="PAID">Commercial subscription</option>
       </select>
-      <p class="hint">Pilot access is subject to fitment review. Commercial subscription follows agreed proposal and activation steps.</p>
+      <p class="hint" id="intentHint">Pilot access provisions a 14-day Scale Trial. You can continue to onboarding immediately after verification.</p>
 
       <label>Plan <span class="req">*</span></label>
-      <select id="planCode">
+      <select id="planCode" onchange="syncCommercialCopy()">
         <option value="SCALE_MONTHLY_E2E">Scale</option>
         <option value="GROWTH_MONTHLY_E2E">Growth</option>
         <option value="STARTER_MONTHLY_E2E">Starter</option>
         <option value="ENTERPRISE_CUSTOM_E2E">Enterprise / Custom</option>
       </select>
-      <p class="hint">Plan selection helps us understand scope. Final access follows founder-led fitment review and onboarding confirmation.</p>
+      <p class="hint" id="planHint">This plan is recorded as your intended commercial path after the trial. It does not replace the trial subscription.</p>
 
       <div id="billingCycleBlock" class="hidden">
         <label>Billing cycle <span class="req">*</span></label>
@@ -144,7 +144,7 @@
       </select>
       <p class="hint">This is locked after workspace creation because it controls pricing, entitlements, modules, onboarding milestones, and workspace visibility.</p>
 
-      <button class="btn" id="btnInitiate" onclick="doInitiate()">Request Pilot Access</button>
+      <button class="btn" id="btnInitiate" onclick="doInitiate()">Start pilot signup</button>
       <div class="msg" id="msg1"></div>
       <p class="foot">Already have an account? <a href="#" onclick="goApp('/signin');return false;">Sign in</a></p>
     </section>
@@ -180,10 +180,10 @@
     <!-- STEP 4: DONE -->
     <section id="step-done" class="hidden" style="text-align:center">
       <div class="success-ico">&#10003;</div>
-      <h1>Workspace created</h1>
-      <p class="sub">Your tenant is provisioned and your admin account is ready. Continue to the app to finish onboarding.</p>
+      <h1 id="doneTitle">Workspace created</h1>
+      <p class="sub" id="doneSub">Your tenant is provisioned and your admin account is ready. Continue to the app to finish onboarding.</p>
       <p class="hint" id="tenantLine"></p>
-      <button class="btn" id="btnGo" onclick="goToApp()" disabled>Continue to onboarding</button>
+      <button class="btn hidden" id="btnGo" onclick="goToApp()" disabled>Continue to onboarding</button>
       <div class="msg" id="msgDone"></div>
     </section>
   </div>
@@ -223,18 +223,14 @@
   }
   function unwrap(json) { return json && json.data !== undefined ? json.data : json; }
 
-  // Access gate: a completed signup may only hand off to the app when the
-  // server returns valid tokens AND a usable subscription (TRIAL or ACTIVE).
-  // Org/billing-only signups (no subscription) must NOT pass tokens to the app.
-  function computeAccessReady(data) {
-    if (!data) return false;
-    if (!data.accessToken) return false;
-    if (!data.refreshToken) return false;
-    if (!data.subscription) return false;
-    if (!data.subscription.id) return false;
-    if (data.subscription.id === "PENDING") return false;
-    var s = data.subscription.status;
-    return s === "TRIAL" || s === "ACTIVE";
+  function isReviewRequiredSelection(intent, plan) {
+    return intent === "PAID" && plan === "ENTERPRISE_CUSTOM_E2E";
+  }
+  function isPaidSelfServe(intent, plan) {
+    return intent === "PAID" && plan !== "ENTERPRISE_CUSTOM_E2E";
+  }
+  function backendAccessReady(data) {
+    return !!(data && data.accessReady === true && data.accessToken && data.refreshToken);
   }
   function errorMessage(json, fallback) {
     if (json && json.errors && json.errors.length) return json.errors[0].message || fallback;
@@ -258,8 +254,9 @@
     return unwrap(json);
   }
 
-  window.syncCommercialIntent = function () {
+  window.syncCommercialCopy = function () {
     var intent = $("commercialIntent").value;
+    var plan = $("planCode").value;
     var billingBlock = $("billingCycleBlock");
     if (intent === "PAID") {
       billingBlock.classList.remove("hidden");
@@ -267,7 +264,30 @@
       billingBlock.classList.add("hidden");
       $("billingCycle").value = "";
     }
+    if (isReviewRequiredSelection(intent, plan)) {
+      $("formTitle").textContent = "Request commercial access";
+      $("formSub").textContent = "Enterprise / Custom requires founder review. Submitting does not grant workspace access or onboarding.";
+      $("intentHint").textContent = "Commercial Enterprise / Custom access is review-required. You will not receive immediate workspace access.";
+      $("planHint").textContent = "Enterprise / Custom is not self-serve. After submit, NEXOS reviews the request before any subscription is activated.";
+      $("btnInitiate").textContent = "Request commercial access";
+      $("btnComplete").textContent = "Submit for review";
+    } else if (isPaidSelfServe(intent, plan)) {
+      $("formTitle").textContent = "Request commercial subscription";
+      $("formSub").textContent = "Starter, Growth, and Scale require payment confirmation before workspace access. Signup does not bypass payment.";
+      $("intentHint").textContent = "Commercial subscription is recorded now. Onboarding opens only after payment is confirmed.";
+      $("planHint").textContent = "This paid plan is created as a draft subscription. Access stays held until payment is confirmed.";
+      $("btnInitiate").textContent = "Continue commercial signup";
+      $("btnComplete").textContent = "Submit commercial request";
+    } else {
+      $("formTitle").textContent = "Start NEXOS Pilot Access";
+      $("formSub").textContent = "Successful email verification creates an onboarding-ready 14-day Scale Trial workspace. Your selected plan is the commercial path after the trial.";
+      $("intentHint").textContent = "Pilot access provisions a 14-day Scale Trial. You can continue to onboarding immediately after verification.";
+      $("planHint").textContent = "This plan is recorded as your intended commercial path after the trial. It does not replace the trial subscription.";
+      $("btnInitiate").textContent = "Start pilot signup";
+      $("btnComplete").textContent = "Create my workspace";
+    }
   };
+  window.syncCommercialIntent = window.syncCommercialCopy;
   window.doInitiate = async function () {
     msg("msg1", "", "");
     var legalName = $("legalName").value.trim();
@@ -350,17 +370,26 @@
       $("tenantLine").textContent = "Tenant " + (data.tenantCode || data.tenantId || "");
       show("step-done"); setDots(3);
 
-      if (computeAccessReady(data)) {
-        // Subscription access confirmed: store result and enable app handoff.
+      if (backendAccessReady(data)) {
         state.result = data;
+        $("doneTitle").textContent = "Workspace created";
+        $("doneSub").textContent = "Your pilot workspace is access-ready. Continue to the app to finish onboarding.";
+        $("btnGo").classList.remove("hidden");
         $("btnGo").disabled = false;
         msg("msgDone", "", "");
       } else {
-        // Org/billing exist but subscription access is not valid yet:
-        // do NOT store tokens, keep handoff blocked.
         state.result = null;
+        $("btnGo").classList.add("hidden");
         $("btnGo").disabled = true;
-        msg("msgDone", "Access held: subscription is not ready. Workspace onboarding will not open until subscription access is confirmed.", "err");
+        if (data.signupOutcome === "REVIEW_PENDING" || data.nextAction === "AWAIT_REVIEW") {
+          $("doneTitle").textContent = "Request received";
+          $("doneSub").textContent = "Your Enterprise / Custom access is pending review. Workspace onboarding will not open until access is approved.";
+          msg("msgDone", "Review required. No app tokens were issued.", "ok");
+        } else {
+          $("doneTitle").textContent = "Request received";
+          $("doneSub").textContent = "Your commercial subscription is recorded. Workspace onboarding will not open until payment is confirmed.";
+          msg("msgDone", "Payment required. No app tokens were issued.", "ok");
+        }
       }
     } catch (e) {
       msg("msg3", e.message, "err");
@@ -371,10 +400,10 @@
   // Tokens are passed in the URL fragment (not query) so they are not logged server-side.
   window.goToApp = function () {
     var r = state.result;
-    if (!computeAccessReady(r)) {
+    if (!backendAccessReady(r)) {
+      $("btnGo").classList.add("hidden");
       $("btnGo").disabled = true;
-      msg("msgDone", "Access held: subscription is not ready. Workspace onboarding will not open until subscription access is confirmed.", "err");
-      alert("Access held: subscription is not ready. Workspace onboarding will not open until subscription access is confirmed.");
+      msg("msgDone", "Onboarding is not available for this signup outcome.", "err");
       return;
     }
     var frag = new URLSearchParams();
@@ -385,6 +414,7 @@
     frag.set("source", "signup");
     window.location.href = APP_BASE + "/onboarding#" + frag.toString();
   };
+  syncCommercialCopy();
 })();
 </script>
 </body>
